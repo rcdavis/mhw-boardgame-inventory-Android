@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">MHW Board Game Inventory</string>
-    <string name="player_name">Player Name:</string>
-    <string name="hunter_name">Hunter Name:</string>
-    <string name="campaign_name">Campaign Name:</string>
-    <string name="palico_name">Palico Name:</string>
+    <string name="player_name">Player Name</string>
+    <string name="hunter_name">Hunter Name</string>
+    <string name="campaign_name">Campaign Name</string>
+    <string name="palico_name">Palico Name</string>
 
     <string name="bones_inv_title">Bones, Ores, and Hides:</string>
     <string name="common_bones_inv_title">Common Bones, Ores, and Hides:</string>
