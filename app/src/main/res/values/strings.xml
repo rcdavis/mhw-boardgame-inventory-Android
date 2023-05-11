@@ -27,4 +27,6 @@
     <string name="inventory_title">Inventory:</string>
     <string name="health_potions_title">Health Potions:</string>
     <string name="campaign_day_tracker_title">Campaign Day Tracker:</string>
+
+    <string name="materials_title">Materials</string>
 </resources>
