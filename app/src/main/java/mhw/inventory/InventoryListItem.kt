@@ -31,8 +31,6 @@ fun InventoryListItem(
     onRemove: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var countState by rememberSaveable { mutableStateOf(count) }
-
     Row(modifier = modifier.padding(start = 8.dp)) {
         Text(
             text = text,
@@ -41,16 +39,13 @@ fun InventoryListItem(
                 .align(Alignment.CenterVertically)
         )
         Text(
-            text = countState.toString(),
+            text = count.toString(),
             modifier = Modifier
                 .padding(end = 8.dp)
                 .align(Alignment.CenterVertically)
         )
         IconButton(
-            onClick = {
-                ++countState
-                onAdd()
-            }
+            onClick = onAdd
         ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowUp,
@@ -58,11 +53,8 @@ fun InventoryListItem(
             )
         }
         IconButton(
-            onClick = {
-                --countState
-                onRemove()
-            },
-            enabled = countState > 0
+            onClick = onRemove,
+            enabled = count > 0
         ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowDown,

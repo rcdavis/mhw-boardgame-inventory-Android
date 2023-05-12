@@ -1,6 +1,12 @@
 package mhw.inventory
 
-data class Material(
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+
+class Material(
     val name: String,
-    var amount: Int = 1
-)
+    initialAmount: Int = 1
+) {
+    var amount by mutableStateOf(initialAmount)
+}
