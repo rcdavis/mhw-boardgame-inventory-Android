@@ -16,7 +16,12 @@ fun MaterialList(
 ) {
     LazyColumn(modifier = modifier) {
         items(materials) { material ->
-            MaterialListItem(material = material)
+            InventoryListItem(
+                text = material.name,
+                count = material.amount,
+                onAdd = { material.amount++ },
+                onRemove = { material.amount-- }
+            )
         }
     }
 }
@@ -25,14 +30,13 @@ fun MaterialList(
 @Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun MaterialListPreview() {
-    val materials = listOf(
-        Material("Carbalite Ore", 2),
-        Material("Malachite Ore", 1),
-        Material("Dragonite Ore", 4)
-    )
+    val materials = getMockMaterials()
+
     MHWBoardGameInventoryTheme {
         Surface {
-            MaterialList(materials = materials)
+            MaterialList(
+                materials = materials
+            )
         }
     }
 }
