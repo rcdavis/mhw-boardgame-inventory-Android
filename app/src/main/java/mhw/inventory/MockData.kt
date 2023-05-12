@@ -15,4 +15,4 @@ fun getMockMaterials() = listOf(
     Material("Boulder Bone", 4),
     Material("Dragonvein Crystal", 7),
     Material("Wingdrake Hide", 4)
-)
+).sortedBy { it.name }

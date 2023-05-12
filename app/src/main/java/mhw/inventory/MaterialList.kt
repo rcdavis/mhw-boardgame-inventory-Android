@@ -16,7 +16,7 @@ fun MaterialList(
 ) {
     LazyColumn(modifier = modifier) {
         items(materials) { material ->
-            MaterialListItem(
+            InventoryListItem(
                 text = material.name,
                 count = material.amount,
                 onAdd = { material.amount++ },

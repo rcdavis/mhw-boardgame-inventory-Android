@@ -26,9 +26,7 @@ fun MaterialScreen(
             style = MaterialTheme.typography.headlineMedium
         )
         MaterialList(
-            materials = materialViewModel.materials,
-            onAdd = {},
-            onRemove = {}
+            materials = materialViewModel.materials
         )
     }
 }

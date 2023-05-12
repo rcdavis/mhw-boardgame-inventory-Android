@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 @Composable
-fun MaterialListItem(
+fun InventoryListItem(
     text: String,
     count: Int,
     onAdd: () -> Unit,
@@ -73,14 +73,14 @@ fun MaterialListItem(
 }
 
 @Composable
-fun MaterialListItem(
+fun InventoryListItem(
     @StringRes textId: Int,
     count: Int,
     onAdd: () -> Unit,
     onRemove: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    MaterialListItem(
+    InventoryListItem(
         text = stringResource(textId),
         count = count,
         onAdd = onAdd,
@@ -95,7 +95,7 @@ fun MaterialListItem(
 fun MaterialListItemPreview() {
     MHWBoardGameInventoryTheme {
         Surface {
-            MaterialListItem(
+            InventoryListItem(
                 textId = R.string.carbalite_ore,
                 count = 1,
                 onAdd = {},
@@ -111,7 +111,7 @@ fun MaterialListItemPreview() {
 fun MaterialListItemEmptyPreview() {
     MHWBoardGameInventoryTheme {
         Surface {
-            MaterialListItem(
+            InventoryListItem(
                 textId = R.string.malachite_ore,
                 count = 0,
                 onAdd = {},
