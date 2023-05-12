@@ -14,7 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +31,7 @@ fun InventoryListItem(
     onRemove: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var countState by remember { mutableStateOf(count) }
+    var countState by rememberSaveable { mutableStateOf(count) }
 
     Row(modifier = modifier.padding(start = 8.dp)) {
         Text(
