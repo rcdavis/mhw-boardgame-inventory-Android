@@ -1,5 +1,6 @@
 package mhw.inventory
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import mhw.inventory.db.MaterialDatabase
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +36,8 @@ class MainActivity : ComponentActivity() {
                     ) { paddingValues ->
                         NavHostContainer(
                             navController = navController,
-                            paddingValues = paddingValues
+                            paddingValues = paddingValues,
+                            context = applicationContext
                         )
                     }
                 }
@@ -46,9 +49,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavHostContainer(
     navController: NavHostController,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    context: Context
 ) {
-    val materialViewModel: MaterialViewModel = viewModel()
+    val materialViewModel: MaterialViewModel = viewModel {
+        MaterialViewModel(
+            MaterialRepository(MaterialDatabase.getDatabase(context).dao())
+        )
+    }
     val profileViewModel: ProfileViewModel = viewModel()
 
     NavHost(

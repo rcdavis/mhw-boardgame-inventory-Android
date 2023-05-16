@@ -1,18 +1,18 @@
 package mhw.inventory
 
 fun getMockMaterials() = listOf(
-    Material("Carbalite Ore", 2),
-    Material("Malachite Ore", 1),
-    Material("Dragonite Ore", 4),
-    Material("Fucium Ore", 0),
-    Material("Quality Bone", 3),
-    Material("Monster Bone Small", 19),
-    Material("Monster Bone Medium", 12),
-    Material("Monster Bone Large", 6),
-    Material("Monster Keenbone", 4),
-    Material("Monster Hardbone", 0),
-    Material("Ancient Bone", 2),
-    Material("Boulder Bone", 4),
-    Material("Dragonvein Crystal", 7),
-    Material("Wingdrake Hide", 4)
+    Material(name = "Ancient Bone", initialAmount = 2),
+    Material(name = "Boulder Bone", initialAmount = 4),
+    Material(name = "Carbalite Ore", initialAmount = 2),
+    Material(name = "Dragonite Ore", initialAmount = 4),
+    Material(name = "Dragonvein Crystal", initialAmount = 7),
+    Material(name = "Fucium Ore", initialAmount = 0),
+    Material(name = "Malachite Ore", initialAmount = 1),
+    Material(name = "Monster Bone Large", initialAmount = 6),
+    Material(name = "Monster Bone Medium", initialAmount = 12),
+    Material(name = "Monster Bone Small", initialAmount = 19),
+    Material(name = "Monster Hardbone", initialAmount = 0),
+    Material(name = "Monster Keenbone", initialAmount = 4),
+    Material(name = "Quality Bone", initialAmount = 3),
+    Material(name = "Wingdrake Hide", initialAmount = 4)
 ).sortedBy { it.name }

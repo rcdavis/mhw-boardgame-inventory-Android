@@ -1,7 +1,5 @@
 package mhw.inventory
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class ProfileViewModel : ViewModel() {

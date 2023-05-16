@@ -1,8 +1,9 @@
 package mhw.inventory
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.Flow
 
-class MaterialViewModel : ViewModel() {
+class MaterialViewModel(private val repository: MaterialRepository) : ViewModel() {
     //private var _materials = mutableListOf<Material>()
     private var _materials = getMockMaterials().toMutableList()
     val materials: List<Material>
@@ -14,5 +15,9 @@ class MaterialViewModel : ViewModel() {
 
     fun removeMaterial(material: Material) {
         _materials.remove(material)
+    }
+
+    fun getAllMaterials(): Flow<List<Material>> {
+        return repository.getAllMaterials()
     }
 }
