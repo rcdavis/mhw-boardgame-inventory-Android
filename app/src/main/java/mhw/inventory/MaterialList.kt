@@ -19,8 +19,7 @@ fun MaterialList(
             InventoryListItem(
                 text = material.name,
                 count = material.amount,
-                onAdd = { material.amount++ },
-                onRemove = { material.amount-- }
+                onCountChange = { material.amount = it }
             )
         }
     }

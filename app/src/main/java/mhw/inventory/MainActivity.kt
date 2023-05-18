@@ -54,7 +54,7 @@ fun NavHostContainer(
 ) {
     val materialViewModel: MaterialViewModel = viewModel {
         MaterialViewModel(
-            MaterialRepository(MaterialDatabase.getDatabase(context).dao())
+            //MaterialRepository(MaterialDatabase.getDatabase(context).dao())
         )
     }
     val profileViewModel: ProfileViewModel = viewModel()
