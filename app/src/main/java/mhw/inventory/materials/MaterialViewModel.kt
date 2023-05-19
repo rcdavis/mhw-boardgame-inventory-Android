@@ -1,22 +1,29 @@
 package mhw.inventory.materials
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import mhw.inventory.getInitialMaterials
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 class MaterialViewModel(
-    //private val repository: MaterialRepository
+    private val repository: MaterialRepository
 ) : ViewModel() {
-    //private var _materials = getMockMaterials().toMutableList()
-    private var _materials = getInitialMaterials().toMutableList()
+    var materials by mutableStateOf(listOf<Material>())
+        private set
 
-    val materials: List<Material>
-        get() = _materials
+    fun fetchMaterials() {
+        viewModelScope.launch {
+            materials = repository.getAllMaterials()
+        }
+    }
 
-    fun addMaterial(material: Material) {
+    /*fun addMaterial(material: Material) {
         _materials.add(material)
     }
 
     fun removeMaterial(material: Material) {
         _materials.remove(material)
-    }
+    }*/
 }
