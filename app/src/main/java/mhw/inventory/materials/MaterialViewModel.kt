@@ -19,11 +19,9 @@ class MaterialViewModel(
         }
     }
 
-    /*fun addMaterial(material: Material) {
-        _materials.add(material)
+    fun updateMaterial(material: Material) {
+        viewModelScope.launch {
+            repository.updateMaterial(material)
+        }
     }
-
-    fun removeMaterial(material: Material) {
-        _materials.remove(material)
-    }*/
 }

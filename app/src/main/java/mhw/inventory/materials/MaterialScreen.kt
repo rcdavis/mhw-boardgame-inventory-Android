@@ -32,7 +32,8 @@ fun MaterialScreen(
             style = MaterialTheme.typography.headlineMedium
         )
         MaterialList(
-            materials = materialViewModel.materials
+            materials = materialViewModel.materials,
+            onUpdate = { materialViewModel.updateMaterial(it) }
         )
     }
 }
