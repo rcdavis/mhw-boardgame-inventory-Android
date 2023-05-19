@@ -17,7 +17,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import mhw.inventory.db.MaterialDatabase
+import mhw.inventory.materials.MaterialScreen
+import mhw.inventory.materials.MaterialViewModel
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 class MainActivity : ComponentActivity() {

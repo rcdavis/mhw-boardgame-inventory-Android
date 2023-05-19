@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import mhw.inventory.Material
+import mhw.inventory.materials.Material
 
 @Dao
 interface MaterialDao {

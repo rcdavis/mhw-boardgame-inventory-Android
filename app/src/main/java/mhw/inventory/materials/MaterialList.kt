@@ -1,4 +1,4 @@
-package mhw.inventory
+package mhw.inventory.materials
 
 import android.content.res.Configuration
 import androidx.compose.foundation.lazy.LazyColumn
@@ -7,6 +7,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import mhw.inventory.InventoryListItem
+import mhw.inventory.getMockMaterials
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 @Composable

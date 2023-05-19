@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import mhw.inventory.Material
+import mhw.inventory.materials.Material
 
 @Database(entities = [Material::class], version = 1, exportSchema = false)
 abstract class MaterialDatabase: RoomDatabase() {

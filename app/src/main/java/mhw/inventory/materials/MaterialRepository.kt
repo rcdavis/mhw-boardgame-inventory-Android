@@ -1,4 +1,4 @@
-package mhw.inventory
+package mhw.inventory.materials
 
 import kotlinx.coroutines.flow.Flow
 import mhw.inventory.db.MaterialDao
