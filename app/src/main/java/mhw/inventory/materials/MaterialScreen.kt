@@ -9,10 +9,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mhw.inventory.R
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
@@ -22,6 +27,8 @@ fun MaterialScreen(
     modifier: Modifier = Modifier,
     materialViewModel: MaterialViewModel = viewModel()
 ) {
+    val materials by materialViewModel.materials.collectAsState()
+
     LaunchedEffect(Unit) {
         materialViewModel.fetchMaterials()
     }
@@ -32,8 +39,8 @@ fun MaterialScreen(
             style = MaterialTheme.typography.headlineMedium
         )
         MaterialList(
-            materials = materialViewModel.materials,
-            onUpdate = { materialViewModel.updateMaterial(it) }
+            materials = materials,
+            onUpdate = { /*materialViewModel.updateMaterial(it)*/ }
         )
     }
 }
@@ -42,11 +49,11 @@ fun MaterialScreen(
 @Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun MaterialScreenPreview() {
-    val materialViewModel: MaterialViewModel = viewModel {
-        MaterialViewModel(
-            MaterialRepository()
-        )
-    }
+    val materialViewModel: MaterialViewModel = viewModel(
+        LocalViewModelStoreOwner.current as ViewModelStoreOwner,
+        "MaterialViewModel",
+        MaterialViewModelFactory(LocalContext.current.applicationContext)
+    )
 
     MHWBoardGameInventoryTheme {
         Surface(modifier = Modifier.fillMaxSize()) {

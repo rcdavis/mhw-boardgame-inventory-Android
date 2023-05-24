@@ -3,14 +3,13 @@ package mhw.inventory.db
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
-import mhw.inventory.materials.Material
+import mhw.inventory.materials.MaterialDBEntry
 
 @Dao
 interface MaterialDao {
     @Insert
-    suspend fun insert(material: Material)
+    suspend fun insert(material: MaterialDBEntry)
 
     @Query("SELECT * FROM materials ORDER BY name ASC")
-    fun getAllMaterials(): Flow<List<Material>>
+    suspend fun getAllMaterials(): List<MaterialDBEntry>
 }

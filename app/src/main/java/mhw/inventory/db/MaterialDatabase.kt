@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import mhw.inventory.materials.Material
+import mhw.inventory.materials.MaterialDBEntry
 
-@Database(entities = [Material::class], version = 1, exportSchema = false)
+@Database(entities = [MaterialDBEntry::class], version = 1, exportSchema = false)
 abstract class MaterialDatabase: RoomDatabase() {
     abstract fun dao(): MaterialDao
 

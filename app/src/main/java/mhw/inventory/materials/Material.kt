@@ -3,15 +3,10 @@ package mhw.inventory.materials
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "materials")
 class Material(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
     val name: String,
-    initialAmount: Int = 1
+    amount: Int
 ) {
-    var amount by mutableStateOf(initialAmount)
+    var amount by mutableStateOf(amount)
 }
