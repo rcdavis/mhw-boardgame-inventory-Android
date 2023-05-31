@@ -9,7 +9,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -17,9 +16,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mhw.inventory.R
+import mhw.inventory.getInitialMaterials
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 @Composable
@@ -27,7 +28,9 @@ fun MaterialScreen(
     modifier: Modifier = Modifier,
     materialViewModel: MaterialViewModel = viewModel()
 ) {
-    val materials by materialViewModel.materials.collectAsState()
+    val materials by materialViewModel.materials.collectAsStateWithLifecycle(
+        initialValue = getInitialMaterials()
+    )
 
     LaunchedEffect(Unit) {
         materialViewModel.fetchMaterials()

@@ -7,5 +7,15 @@ import androidx.room.PrimaryKey
 data class MaterialDBEntry(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String
-)
+    val name: String,
+    val amount: Int
+) {
+    companion object {
+        fun fromMaterial(material: Material): MaterialDBEntry {
+            return MaterialDBEntry(
+                name = material.name,
+                amount = material.amount
+            )
+        }
+    }
+}

@@ -9,4 +9,10 @@ class Material(
     amount: Int
 ) {
     var amount by mutableStateOf(amount)
+
+    companion object {
+        fun fromMaterialDBEntry(mdbe: MaterialDBEntry): Material {
+            return Material(name = mdbe.name, amount = mdbe.amount)
+        }
+    }
 }

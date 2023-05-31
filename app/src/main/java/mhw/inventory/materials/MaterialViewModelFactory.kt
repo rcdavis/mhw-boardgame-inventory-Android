@@ -8,7 +8,7 @@ import mhw.inventory.db.MaterialDatabase
 class MaterialViewModelFactory(private val context: Context): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return MaterialViewModel(MaterialRepository(
-            //MaterialDatabase.getDatabase(context).dao()
+            MaterialDatabase.getDatabase(context).dao()
         )) as T
     }
 }
