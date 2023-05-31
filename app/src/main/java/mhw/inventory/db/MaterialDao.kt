@@ -15,6 +15,9 @@ interface MaterialDao {
     @Insert
     suspend fun insertAll(materials: List<MaterialDBEntry>)
 
+    @Query("DELETE FROM materials")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM materials ORDER BY name ASC")
     fun getAllMaterials(): Flow<List<MaterialDBEntry>>
 }

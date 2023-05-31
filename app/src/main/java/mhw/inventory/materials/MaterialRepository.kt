@@ -33,11 +33,17 @@ class MaterialRepository(
 
     suspend fun updateMaterial(material: Material) {
         withContext(Dispatchers.IO) {
-            val index = _materials.value.indexOf(material)
-            if (index != -1) {
-                //_materials.value[index] = material
-                Log.d("MHW", "Updated material in repo: ${material.name} amount=${material.amount}")
-            }
+            dao.insert(MaterialDBEntry.fromMaterial(material))
+            Log.d("MHW", "Updated material in repo: ${material.name} amount=${material.amount}")
+        }
+    }
+
+    suspend fun resetAllMaterials() {
+        withContext(Dispatchers.IO) {
+            dao.deleteAll()
+            val mats = getInitialMaterials()
+            dao.insertAll(mats.map { MaterialDBEntry.fromMaterial(it) })
+            _materials.value = mats
         }
     }
 }

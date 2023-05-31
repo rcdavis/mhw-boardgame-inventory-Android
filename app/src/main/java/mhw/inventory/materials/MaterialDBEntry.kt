@@ -13,6 +13,7 @@ data class MaterialDBEntry(
     companion object {
         fun fromMaterial(material: Material): MaterialDBEntry {
             return MaterialDBEntry(
+                id = material.id,
                 name = material.name,
                 amount = material.amount
             )

@@ -43,7 +43,7 @@ fun MaterialScreen(
         )
         MaterialList(
             materials = materials,
-            onUpdate = { /*materialViewModel.updateMaterial(it)*/ }
+            onUpdate = { materialViewModel.updateMaterial(it) }
         )
     }
 }

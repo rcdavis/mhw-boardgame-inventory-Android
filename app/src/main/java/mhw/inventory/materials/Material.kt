@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
 class Material(
+    val id: Int,
     val name: String,
     amount: Int
 ) {
@@ -12,7 +13,7 @@ class Material(
 
     companion object {
         fun fromMaterialDBEntry(mdbe: MaterialDBEntry): Material {
-            return Material(name = mdbe.name, amount = mdbe.amount)
+            return Material(id = mdbe.id, name = mdbe.name, amount = mdbe.amount)
         }
     }
 }
