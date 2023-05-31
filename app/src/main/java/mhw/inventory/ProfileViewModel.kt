@@ -1,13 +1,23 @@
 package mhw.inventory
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class ProfileViewModel : ViewModel() {
-    var campaignName by mutableStateOf("")
-    var playerName by mutableStateOf("")
-    var hunterName by mutableStateOf("")
-    var palicoName by mutableStateOf("")
+    val profile = Profile()
+
+    fun updateCampaignName(name: String) {
+        profile.campaignName = name
+    }
+
+    fun updatePlayerName(name: String) {
+        profile.playerName = name
+    }
+
+    fun updateHunterName(name: String) {
+        profile.hunterName = name
+    }
+
+    fun updatePalicoName(name: String) {
+        profile.palicoName = name
+    }
 }

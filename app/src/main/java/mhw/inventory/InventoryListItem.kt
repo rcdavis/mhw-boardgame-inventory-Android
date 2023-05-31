@@ -12,10 +12,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,12 +23,9 @@ import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 fun InventoryListItem(
     text: String,
     count: Int,
-    onAdd: () -> Unit,
-    onRemove: () -> Unit,
+    onCountChange: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var countState by rememberSaveable { mutableStateOf(count) }
-
     Row(modifier = modifier.padding(start = 8.dp)) {
         Text(
             text = text,
@@ -41,16 +34,13 @@ fun InventoryListItem(
                 .align(Alignment.CenterVertically)
         )
         Text(
-            text = countState.toString(),
+            text = count.toString(),
             modifier = Modifier
                 .padding(end = 8.dp)
                 .align(Alignment.CenterVertically)
         )
         IconButton(
-            onClick = {
-                ++countState
-                onAdd()
-            }
+            onClick = { onCountChange(count + 1) }
         ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowUp,
@@ -58,11 +48,8 @@ fun InventoryListItem(
             )
         }
         IconButton(
-            onClick = {
-                --countState
-                onRemove()
-            },
-            enabled = countState > 0
+            onClick = { onCountChange(count - 1) },
+            enabled = count > 0
         ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowDown,
@@ -76,15 +63,13 @@ fun InventoryListItem(
 fun InventoryListItem(
     @StringRes textId: Int,
     count: Int,
-    onAdd: () -> Unit,
-    onRemove: () -> Unit,
+    onCountChange: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     InventoryListItem(
         text = stringResource(textId),
         count = count,
-        onAdd = onAdd,
-        onRemove = onRemove,
+        onCountChange = onCountChange,
         modifier = modifier
     )
 }
@@ -98,8 +83,7 @@ fun MaterialListItemPreview() {
             InventoryListItem(
                 textId = R.string.carbalite_ore,
                 count = 1,
-                onAdd = {},
-                onRemove = {}
+                onCountChange = {}
             )
         }
     }
@@ -114,8 +98,7 @@ fun MaterialListItemEmptyPreview() {
             InventoryListItem(
                 textId = R.string.malachite_ore,
                 count = 0,
-                onAdd = {},
-                onRemove = {}
+                onCountChange = {}
             )
         }
     }

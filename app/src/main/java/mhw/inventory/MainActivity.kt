@@ -11,11 +11,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import mhw.inventory.materials.MaterialScreen
+import mhw.inventory.materials.MaterialViewModel
+import mhw.inventory.materials.MaterialViewModelFactory
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,20 +53,26 @@ fun NavHostContainer(
     navController: NavHostController,
     paddingValues: PaddingValues
 ) {
-    val materialViewModel: MaterialViewModel = viewModel()
-    val profileViewModel: ProfileViewModel = viewModel()
+    LocalViewModelStoreOwner.current?.let {
+        val materialViewModel: MaterialViewModel = viewModel(
+            it,
+            "MaterialViewModel",
+            MaterialViewModelFactory(LocalContext.current.applicationContext)
+        )
+        val profileViewModel: ProfileViewModel = viewModel()
 
-    NavHost(
-        navController = navController,
-        startDestination = "materials",
-        modifier = Modifier.padding(paddingValues),
-        builder = {
-            composable("materials") {
-                MaterialScreen(materialViewModel = materialViewModel)
+        NavHost(
+            navController = navController,
+            startDestination = "materials",
+            modifier = Modifier.padding(paddingValues),
+            builder = {
+                composable("materials") {
+                    MaterialScreen(materialViewModel = materialViewModel)
+                }
+                composable("profile") {
+                    ProfileScreen(profileViewModel = profileViewModel)
+                }
             }
-            composable("profile") {
-                ProfileScreen(profileViewModel = profileViewModel)
-            }
-        }
-    )
+        )
+    }
 }

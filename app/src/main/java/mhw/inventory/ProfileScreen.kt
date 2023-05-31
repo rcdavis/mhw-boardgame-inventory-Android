@@ -25,8 +25,8 @@ fun ProfileScreen(
 ) {
     Column(modifier = modifier.padding(8.dp)) {
         TextField(
-            value = profileViewModel.campaignName,
-            onValueChange = { profileViewModel.campaignName = it },
+            value = profileViewModel.profile.campaignName,
+            onValueChange = { profileViewModel.updateCampaignName(it) },
             label = {
                 Text(stringResource(R.string.campaign_name))
             },
@@ -35,8 +35,8 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.playerName,
-            onValueChange = { profileViewModel.playerName = it },
+            value = profileViewModel.profile.playerName,
+            onValueChange = { profileViewModel.updatePlayerName(it) },
             label = {
                 Text(stringResource(R.string.player_name))
             },
@@ -45,8 +45,8 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.hunterName,
-            onValueChange = { profileViewModel.hunterName = it },
+            value = profileViewModel.profile.hunterName,
+            onValueChange = { profileViewModel.updateHunterName(it) },
             label = {
                 Text(stringResource(R.string.hunter_name))
             },
@@ -55,8 +55,8 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.palicoName,
-            onValueChange = { profileViewModel.palicoName = it },
+            value = profileViewModel.profile.palicoName,
+            onValueChange = { profileViewModel.updatePalicoName(it) },
             label = {
                 Text(stringResource(R.string.palico_name))
             },

@@ -1,4 +1,4 @@
-package mhw.inventory
+package mhw.inventory.materials
 
 import android.content.res.Configuration
 import androidx.compose.foundation.lazy.LazyColumn
@@ -7,11 +7,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import mhw.inventory.InventoryListItem
+import mhw.inventory.getMockMaterials
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 @Composable
 fun MaterialList(
     materials: List<Material>,
+    onUpdate: (Material) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
@@ -19,8 +22,10 @@ fun MaterialList(
             InventoryListItem(
                 text = material.name,
                 count = material.amount,
-                onAdd = { material.amount++ },
-                onRemove = { material.amount-- }
+                onCountChange = {
+                    material.amount = it
+                    onUpdate(material)
+                }
             )
         }
     }
@@ -35,7 +40,8 @@ fun MaterialListPreview() {
     MHWBoardGameInventoryTheme {
         Surface {
             MaterialList(
-                materials = materials
+                materials = materials,
+                onUpdate = {}
             )
         }
     }

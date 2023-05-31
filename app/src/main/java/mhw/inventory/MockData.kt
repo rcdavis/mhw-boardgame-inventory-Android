@@ -1,18 +1,37 @@
 package mhw.inventory
 
+import mhw.inventory.materials.Material
+
 fun getMockMaterials() = listOf(
-    Material("Carbalite Ore", 2),
-    Material("Malachite Ore", 1),
-    Material("Dragonite Ore", 4),
-    Material("Fucium Ore", 0),
-    Material("Quality Bone", 3),
-    Material("Monster Bone Small", 19),
-    Material("Monster Bone Medium", 12),
-    Material("Monster Bone Large", 6),
-    Material("Monster Keenbone", 4),
-    Material("Monster Hardbone", 0),
-    Material("Ancient Bone", 2),
-    Material("Boulder Bone", 4),
-    Material("Dragonvein Crystal", 7),
-    Material("Wingdrake Hide", 4)
-).sortedBy { it.name }
+    Material(id = 0, name = "Ancient Bone", amount = 2),
+    Material(id = 1, name = "Boulder Bone", amount = 4),
+    Material(id = 2, name = "Carbalite Ore", amount = 2),
+    Material(id = 3, name = "Dragonite Ore", amount = 4),
+    Material(id = 4, name = "Dragonvein Crystal", amount = 7),
+    Material(id = 5, name = "Fucium Ore", amount = 0),
+    Material(id = 6, name = "Malachite Ore", amount = 1),
+    Material(id = 7, name = "Monster Bone Large", amount = 6),
+    Material(id = 8, name = "Monster Bone Medium", amount = 12),
+    Material(id = 9, name = "Monster Bone Small", amount = 19),
+    Material(id = 10, name = "Monster Hardbone", amount = 0),
+    Material(id = 11, name = "Monster Keenbone", amount = 4),
+    Material(id = 12, name = "Quality Bone", amount = 3),
+    Material(id = 13, name = "Wingdrake Hide", amount = 4)
+)
+
+fun getInitialMaterials() = listOf(
+    Material(id = 0, name = "Ancient Bone", amount = 0),
+    Material(id = 1, name = "Boulder Bone", amount = 0),
+    Material(id = 2, name = "Carbalite Ore", amount = 0),
+    Material(id = 3, name = "Dragonite Ore", amount = 0),
+    Material(id = 4, name = "Dragonvein Crystal", amount = 0),
+    Material(id = 5, name = "Fucium Ore", amount = 0),
+    Material(id = 6, name = "Malachite Ore", amount = 0),
+    Material(id = 7, name = "Monster Bone Large", amount = 0),
+    Material(id = 8, name = "Monster Bone Medium", amount = 0),
+    Material(id = 9, name = "Monster Bone Small", amount = 0),
+    Material(id = 10, name = "Monster Hardbone", amount = 0),
+    Material(id = 11, name = "Monster Keenbone", amount = 0),
+    Material(id = 12, name = "Quality Bone", amount = 0),
+    Material(id = 13, name = "Wingdrake Hide", amount = 0)
+)
