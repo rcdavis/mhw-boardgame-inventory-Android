@@ -12,7 +12,7 @@ interface MaterialDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(material: MaterialDBEntry)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(materials: List<MaterialDBEntry>)
 
     @Query("DELETE FROM materials")
