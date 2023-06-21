@@ -1,29 +1,34 @@
 package mhw.inventory.materials
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import mhw.inventory.getInitialMaterials
 
 class MaterialViewModel(
     private val repository: MaterialRepository
 ) : ViewModel() {
-    private val _materials = MutableStateFlow(getInitialMaterials())
-    val materials = _materials.asStateFlow()
+    var uiState by mutableStateOf(MaterialScreenUiState())
+        private set
 
     fun fetchMaterials() {
         viewModelScope.launch {
-            repository.getAllMaterials().collect {
-                _materials.value = it
-            }
+            repository.getAllMaterials()
+                .catch {
+                    uiState = uiState.copy(errorMessage = it.localizedMessage)
+                }
+                .collect {
+                    uiState = uiState.copy(materials = it)
+                }
         }
     }
 
-    fun updateMaterial(material: Material) {
+    fun updateMaterialCount(material: Material, count: Int) {
         viewModelScope.launch {
-            repository.updateMaterial(material)
+            repository.updateMaterial(material, count)
         }
     }
 }

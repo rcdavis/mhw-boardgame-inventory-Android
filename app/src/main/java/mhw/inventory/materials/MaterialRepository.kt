@@ -31,10 +31,11 @@ class MaterialRepository(
             }
     }
 
-    suspend fun updateMaterial(material: Material) {
+    suspend fun updateMaterial(material: Material, count: Int) {
         withContext(Dispatchers.IO) {
+            material.amount = count
             dao.insert(MaterialDBEntry.fromMaterial(material))
-            Log.d("MHW", "Updated material in repo: ${material.name} amount=${material.amount}")
+            Log.d("MHW", "Updated material in repo: ${material.name} amount=${count}")
         }
     }
 
