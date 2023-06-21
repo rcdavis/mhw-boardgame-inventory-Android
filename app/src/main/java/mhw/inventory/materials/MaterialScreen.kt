@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import mhw.inventory.ErrorDialog
 import mhw.inventory.R
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
@@ -30,6 +31,13 @@ fun MaterialScreen(
     }
 
     Column(modifier = modifier.padding(8.dp)) {
+        ErrorDialog(
+            title = "Material Error",
+            message = materialViewModel.uiState.errorMessage
+        ) {
+            materialViewModel.clearErrors()
+        }
+
         Text(
             text = stringResource(R.string.materials_title),
             style = MaterialTheme.typography.headlineMedium

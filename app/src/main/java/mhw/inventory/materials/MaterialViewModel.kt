@@ -1,5 +1,6 @@
 package mhw.inventory.materials
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -18,6 +19,7 @@ class MaterialViewModel(
         viewModelScope.launch {
             repository.getAllMaterials()
                 .catch {
+                    Log.e("MHW", it.toString())
                     uiState = uiState.copy(errorMessage = it.localizedMessage)
                 }
                 .collect {
@@ -30,5 +32,9 @@ class MaterialViewModel(
         viewModelScope.launch {
             repository.updateMaterial(material, count)
         }
+    }
+
+    fun clearErrors() {
+        uiState = uiState.copy(errorMessage = null)
     }
 }
