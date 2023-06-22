@@ -34,6 +34,12 @@ class MaterialViewModel(
         }
     }
 
+    fun deleteAllMaterials() {
+        viewModelScope.launch {
+            repository.deleteAllMaterials()
+        }
+    }
+
     fun clearErrors() {
         uiState = uiState.copy(errorMessage = null)
     }

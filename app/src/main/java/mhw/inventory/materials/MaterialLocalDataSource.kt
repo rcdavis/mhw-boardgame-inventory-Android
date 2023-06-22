@@ -17,4 +17,12 @@ class MaterialLocalDataSource(
     suspend fun insertMaterial(material: Material) {
         dao.insert(MaterialDBEntry.fromMaterial(material))
     }
+
+    suspend fun insertAll(materials: List<Material>) {
+        dao.insertAll(materials.map { MaterialDBEntry.fromMaterial(it) })
+    }
+
+    suspend fun deleteAll() {
+        dao.deleteAll()
+    }
 }

@@ -25,4 +25,10 @@ class MaterialRepository(
             Log.d("MHW", "Updated material in repo: ${material.name} amount=${count}")
         }
     }
+
+    suspend fun deleteAllMaterials() {
+        withContext(Dispatchers.IO) {
+            localDataSource.deleteAll()
+        }
+    }
 }

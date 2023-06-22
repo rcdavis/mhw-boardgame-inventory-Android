@@ -12,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -22,6 +23,7 @@ import mhw.inventory.materials.MaterialScreen
 import mhw.inventory.materials.MaterialViewModel
 import mhw.inventory.materials.MaterialViewModelFactory
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
+import mhw.inventory.utils.Keys
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -53,26 +55,21 @@ fun NavHostContainer(
     navController: NavHostController,
     paddingValues: PaddingValues
 ) {
-    LocalViewModelStoreOwner.current?.let {
-        val materialViewModel: MaterialViewModel = viewModel(
-            it,
-            "MaterialViewModel",
-            MaterialViewModelFactory(LocalContext.current.applicationContext)
-        )
-        val profileViewModel: ProfileViewModel = viewModel()
-
-        NavHost(
-            navController = navController,
-            startDestination = "materials",
-            modifier = Modifier.padding(paddingValues),
-            builder = {
-                composable("materials") {
-                    MaterialScreen(materialViewModel = materialViewModel)
-                }
-                composable("profile") {
-                    ProfileScreen(profileViewModel = profileViewModel)
-                }
+    NavHost(
+        navController = navController,
+        startDestination = Keys.materialScreen,
+        modifier = Modifier.padding(paddingValues),
+        builder = {
+            composable(Keys.materialScreen) {
+                MaterialScreen(materialViewModel = viewModel(
+                    LocalViewModelStoreOwner.current as ViewModelStoreOwner,
+                    "MaterialViewModel",
+                    MaterialViewModelFactory(LocalContext.current.applicationContext)
+                ))
             }
-        )
-    }
+            composable(Keys.profileScreen) {
+                ProfileScreen(profileViewModel = viewModel())
+            }
+        }
+    )
 }
