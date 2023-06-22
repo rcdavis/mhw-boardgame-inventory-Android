@@ -20,7 +20,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mhw.inventory.materials.MaterialScreen
-import mhw.inventory.materials.MaterialViewModel
 import mhw.inventory.materials.MaterialViewModelFactory
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 import mhw.inventory.utils.Keys
@@ -37,6 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Scaffold(
+                        topBar = { TopBar(navController = navController) },
                         bottomBar = { BottomNav(navController = navController) }
                     ) { paddingValues ->
                         NavHostContainer(

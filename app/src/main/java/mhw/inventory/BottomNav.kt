@@ -38,12 +38,6 @@ fun BottomNav(
                         contentDescription = null
                     )
                 },
-                label = {
-                    Text(
-                        text = stringResource(navItem.labelId),
-                        color = MaterialTheme.colorScheme.secondary
-                    )
-                },
                 selected = curRoute == navItem.route,
                 onClick = {
                     navController.navigate(navItem.route)
