@@ -30,13 +30,23 @@ class MaterialViewModel(
 
     fun updateMaterialCount(material: Material, count: Int) {
         viewModelScope.launch {
-            repository.updateMaterial(material, count)
+            try {
+                repository.updateMaterial(material, count)
+            } catch(e: Exception) {
+                Log.e("MHW", "Failed to update material ${material.name}: $e")
+                uiState = uiState.copy(errorMessage = e.localizedMessage)
+            }
         }
     }
 
     fun deleteAllMaterials() {
         viewModelScope.launch {
-            repository.deleteAllMaterials()
+            try {
+                repository.deleteAllMaterials()
+            } catch(e: Exception) {
+                Log.e("MHW", "Failed to delete materials: $e")
+                uiState = uiState.copy(errorMessage = e.localizedMessage)
+            }
         }
     }
 

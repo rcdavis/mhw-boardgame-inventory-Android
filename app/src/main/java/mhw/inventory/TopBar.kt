@@ -1,16 +1,15 @@
 package mhw.inventory
 
-import android.widget.Toast
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -18,11 +17,12 @@ import mhw.inventory.utils.Keys
 
 @Composable
 fun TopBar(
-    navController: NavHostController
+    navController: NavHostController,
+    onMaterialRefresh: () -> Unit,
+    onMaterialDeleted: () -> Unit
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val curRoute = navBackStackEntry?.destination?.route
-    val context = LocalContext.current.applicationContext
     val titleText = when (curRoute) {
         Keys.materialScreen -> stringResource(R.string.materials_title)
         Keys.profileScreen -> stringResource(R.string.profile_title)
@@ -33,9 +33,14 @@ fun TopBar(
         title = { Text(titleText) },
         actions = {
             if (curRoute == Keys.materialScreen) {
-                TopAppBarActionButton(imageVector = Icons.Filled.Refresh) {
-                    Toast.makeText(context, "Refreshing", Toast.LENGTH_SHORT).show()
-                }
+                TopAppBarActionButton(
+                    imageVector = Icons.Filled.Refresh,
+                    onClick = onMaterialRefresh
+                )
+                TopAppBarActionButton(
+                    imageVector = Icons.Filled.Delete,
+                    onClick = onMaterialDeleted
+                )
             }
         }
     )

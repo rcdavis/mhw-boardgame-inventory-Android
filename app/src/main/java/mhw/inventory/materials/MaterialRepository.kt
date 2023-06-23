@@ -3,19 +3,28 @@ package mhw.inventory.materials
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import mhw.inventory.getInitialMaterials
 
 class MaterialRepository(
     private val localDataSource: MaterialLocalDataSource
 ) {
-    private val _materials = MutableStateFlow(getInitialMaterials())
-    val materials =  _materials.asStateFlow()
+    private var _materials = mutableListOf<Material>()
 
-    fun getAllMaterials(): Flow<List<Material>> {
-        return localDataSource.getAllMaterials()
+    fun getAllMaterials(): Flow<List<Material>> = flow {
+        if (_materials.isEmpty()) {
+            val localMats = localDataSource.getAllMaterials()
+            _materials = if (localMats.isNotEmpty()) {
+                localMats.toMutableList()
+            } else {
+                getInitialMaterials().toMutableList()
+            }
+
+            localDataSource.insertAll(_materials)
+        }
+
+        emit(_materials)
     }
 
     suspend fun updateMaterial(material: Material, count: Int) {
