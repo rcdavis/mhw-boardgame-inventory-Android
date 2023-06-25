@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import mhw.inventory.materials.MaterialDBEntry
 
 @Dao
@@ -18,5 +19,8 @@ interface MaterialDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM materials ORDER BY name ASC")
-    suspend fun getAllMaterials(): List<MaterialDBEntry>
+    fun getAllMaterials(): Flow<List<MaterialDBEntry>>
+
+    @Query("SELECT COUNT(id) FROM materials")
+    suspend fun getMaterialCount(): Int
 }

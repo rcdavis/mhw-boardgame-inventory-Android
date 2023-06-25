@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import mhw.inventory.getInitialMaterials
 
 class MaterialViewModel(
     private val repository: MaterialRepository
@@ -17,7 +18,10 @@ class MaterialViewModel(
 
     fun fetchMaterials() {
         viewModelScope.launch {
-            repository.getAllMaterials()
+            if (repository.getMaterialCount() == 0)
+                repository.clearAndResetMaterials(getInitialMaterials())
+
+            repository.materials
                 .catch {
                     Log.e("MHW", it.toString())
                     uiState = uiState.copy(errorMessage = it.localizedMessage)
@@ -25,6 +29,36 @@ class MaterialViewModel(
                 .collect {
                     uiState = uiState.copy(materials = it)
                 }
+        }
+    }
+
+    fun clearAndResetMaterials() {
+        viewModelScope.launch {
+            try {
+                repository.clearAndResetMaterials(getInitialMaterials())
+            } catch(e: Exception) {
+                Log.e("MHW", "Failed to reset materials: $e")
+                uiState = uiState.copy(errorMessage = e.localizedMessage)
+            }
+        }
+    }
+
+    fun testAddingMaterial() {
+        addMaterial(Material(
+            id = 1001,
+            name = "Greatest Jagras Hide",
+            amount = 1
+        ))
+    }
+
+    fun addMaterial(material: Material) {
+        viewModelScope.launch {
+            try {
+                repository.addMaterial(material)
+            } catch(e: Exception) {
+                Log.e("MHW", "Failed to add material ${material.name}: $e")
+                uiState = uiState.copy(errorMessage = e.localizedMessage)
+            }
         }
     }
 

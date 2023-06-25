@@ -1,13 +1,15 @@
 package mhw.inventory.materials
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import mhw.inventory.db.MaterialDao
 
 class MaterialLocalDataSource(
     private val dao: MaterialDao
 ) {
-    suspend fun getAllMaterials(): List<Material> {
-        return dao.getAllMaterials().map {
-            Material.fromMaterialDBEntry(it)
+    fun getAllMaterials(): Flow<List<Material>> {
+        return dao.getAllMaterials().map { materials ->
+            materials.map { Material.fromMaterialDBEntry(it) }
         }
     }
 
@@ -22,4 +24,6 @@ class MaterialLocalDataSource(
     suspend fun deleteAll() {
         dao.deleteAll()
     }
+
+    suspend fun getMaterialCount() = dao.getMaterialCount()
 }

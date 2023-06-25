@@ -4,6 +4,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
@@ -18,6 +19,7 @@ import mhw.inventory.utils.Keys
 @Composable
 fun TopBar(
     navController: NavHostController,
+    onMaterialAdd: () -> Unit,
     onMaterialRefresh: () -> Unit,
     onMaterialDeleted: () -> Unit
 ) {
@@ -33,6 +35,10 @@ fun TopBar(
         title = { Text(titleText) },
         actions = {
             if (curRoute == Keys.materialScreen) {
+                TopAppBarActionButton(
+                    imageVector = Icons.Filled.Add,
+                    onClick = onMaterialAdd
+                )
                 TopAppBarActionButton(
                     imageVector = Icons.Filled.Refresh,
                     onClick = onMaterialRefresh
