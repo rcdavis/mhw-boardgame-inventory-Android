@@ -5,8 +5,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,8 +19,7 @@ import mhw.inventory.utils.Keys
 fun TopBar(
     navController: NavHostController,
     onMaterialAdd: () -> Unit,
-    onMaterialRefresh: () -> Unit,
-    onMaterialDeleted: () -> Unit
+    onMaterialReset: () -> Unit
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val curRoute = navBackStackEntry?.destination?.route
@@ -40,12 +38,8 @@ fun TopBar(
                     onClick = onMaterialAdd
                 )
                 TopAppBarActionButton(
-                    imageVector = Icons.Filled.Refresh,
-                    onClick = onMaterialRefresh
-                )
-                TopAppBarActionButton(
-                    imageVector = Icons.Filled.Delete,
-                    onClick = onMaterialDeleted
+                    imageVector = Icons.Filled.Clear,
+                    onClick = onMaterialReset
                 )
             }
         }

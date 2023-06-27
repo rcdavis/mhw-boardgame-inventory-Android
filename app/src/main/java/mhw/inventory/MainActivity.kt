@@ -44,8 +44,7 @@ class MainActivity : ComponentActivity() {
                             TopBar(
                                 navController = navController,
                                 onMaterialAdd = { materialViewModel.testAddingMaterial() },
-                                onMaterialRefresh = { materialViewModel.clearAndResetMaterials() },
-                                onMaterialDeleted = { materialViewModel.deleteAllMaterials() }
+                                onMaterialReset = { materialViewModel.clearAndResetMaterials() }
                             )
                         },
                         bottomBar = {
