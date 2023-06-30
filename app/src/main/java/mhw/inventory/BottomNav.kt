@@ -3,7 +3,6 @@ package mhw.inventory
 import android.content.res.Configuration
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -35,7 +34,7 @@ fun BottomNav(
                 icon = {
                     Icon(
                         imageVector = navItem.icon,
-                        contentDescription = null
+                        contentDescription = stringResource(navItem.labelId)
                     )
                 },
                 selected = curRoute == navItem.route,

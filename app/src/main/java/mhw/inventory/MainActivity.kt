@@ -54,16 +54,15 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             navController = navController,
                             startDestination = Keys.materialScreen,
-                            modifier = Modifier.padding(paddingValues),
-                            builder = {
-                                composable(Keys.materialScreen) {
-                                    MaterialScreen(materialViewModel = materialViewModel)
-                                }
-                                composable(Keys.profileScreen) {
-                                    ProfileScreen(profileViewModel = viewModel())
-                                }
+                            modifier = Modifier.padding(paddingValues)
+                        ) {
+                            composable(Keys.materialScreen) {
+                                MaterialScreen(materialViewModel = materialViewModel)
                             }
-                        )
+                            composable(Keys.profileScreen) {
+                                ProfileScreen(profileViewModel = viewModel())
+                            }
+                        }
                     }
                 }
             }
