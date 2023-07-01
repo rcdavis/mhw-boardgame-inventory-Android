@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mhw.inventory.materials.MaterialScreen
+import mhw.inventory.profile.ProfileScreen
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 import mhw.inventory.utils.Keys
 import mhw.inventory.utils.ViewModels

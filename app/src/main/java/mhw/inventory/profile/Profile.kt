@@ -1,4 +1,4 @@
-package mhw.inventory
+package mhw.inventory.profile
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

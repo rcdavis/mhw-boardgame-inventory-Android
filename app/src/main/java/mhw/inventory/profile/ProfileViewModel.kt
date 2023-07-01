@@ -1,4 +1,4 @@
-package mhw.inventory
+package mhw.inventory.profile
 
 import androidx.lifecycle.ViewModel
 
