@@ -23,4 +23,7 @@ interface MaterialDao {
 
     @Query("SELECT COUNT(id) FROM materials")
     suspend fun getMaterialCount(): Int
+
+    @Query("SELECT MAX(id) FROM materials")
+    suspend fun getMaxId(): Int
 }

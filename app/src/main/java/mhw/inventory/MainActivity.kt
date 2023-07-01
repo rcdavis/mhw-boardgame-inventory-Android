@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         topBar = {
                             TopBar(
                                 navController = navController,
-                                onMaterialAdd = { materialViewModel.testAddingMaterial() },
+                                onMaterialAdd = { materialViewModel.testAddingMaterials() },
                                 onMaterialReset = { materialViewModel.clearAndResetMaterials() }
                             )
                         },
