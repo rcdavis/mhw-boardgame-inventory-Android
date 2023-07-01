@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,12 +26,16 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     profileViewModel: ProfileViewModel = viewModel()
 ) {
+    LaunchedEffect(Unit) {
+        profileViewModel.fetchProfile()
+    }
+
     Column(modifier = modifier.padding(8.dp)) {
         ErrorDialog(
             title = "Profile Error",
-            message = null
+            message = profileViewModel.uiState.errorMessage
         ) {
-            // TODO: Implement error messages for profile screen
+            profileViewModel.clearErrors()
         }
 
         TextField(
