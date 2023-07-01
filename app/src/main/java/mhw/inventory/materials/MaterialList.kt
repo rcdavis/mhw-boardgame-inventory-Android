@@ -14,7 +14,7 @@ import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 @Composable
 fun MaterialList(
     materials: List<Material>,
-    onUpdate: (Material) -> Unit,
+    onUpdate: (Material, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
@@ -23,8 +23,7 @@ fun MaterialList(
                 text = material.name,
                 count = material.amount,
                 onCountChange = {
-                    material.amount = it
-                    onUpdate(material)
+                    onUpdate(material, it)
                 }
             )
         }
@@ -41,7 +40,7 @@ fun MaterialListPreview() {
         Surface {
             MaterialList(
                 materials = materials,
-                onUpdate = {}
+                onUpdate = { _, _ -> }
             )
         }
     }

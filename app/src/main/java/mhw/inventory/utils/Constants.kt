@@ -11,12 +11,12 @@ object Constants {
         BottonNavItem(
             labelId = R.string.materials_title,
             icon = Icons.Default.List,
-            route = "materials"
+            route = Keys.materialScreen
         ),
         BottonNavItem(
             labelId = R.string.profile_title,
             icon = Icons.Default.AccountCircle,
-            route = "profile"
+            route = Keys.profileScreen
         )
     )
 }

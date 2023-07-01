@@ -3,47 +3,50 @@ package mhw.inventory.materials
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import mhw.inventory.db.MaterialDao
-import mhw.inventory.getInitialMaterials
+import mhw.inventory.utils.addIfNotExist
 
 class MaterialRepository(
-    private val dao: MaterialDao
+    private val localDataSource: MaterialLocalDataSource
 ) {
-    private val _materials = MutableStateFlow(getInitialMaterials())
-    val materials =  _materials.asStateFlow()
+    private var _materials = mutableListOf<Material>()
+    val materials: Flow<List<Material>>
+        get() = localDataSource.getAllMaterials()
 
-    fun getAllMaterials(): Flow<List<Material>> {
-        return dao.getAllMaterials()
-            .map { entry ->
-                if (entry.isEmpty()) {
-                    Log.d("MHW", "Creating materials and inserting into DB")
-                    val mats = getInitialMaterials()
-                    dao.insertAll(mats.map { MaterialDBEntry.fromMaterial(it) })
-                    return@map mats
-                }
-
-                Log.d("MHW", "Returning materials from DB")
-                return@map entry.map { Material.fromMaterialDBEntry(it) }
-            }
-    }
-
-    suspend fun updateMaterial(material: Material) {
+    suspend fun addMaterial(material: Material) {
         withContext(Dispatchers.IO) {
-            dao.insert(MaterialDBEntry.fromMaterial(material))
-            Log.d("MHW", "Updated material in repo: ${material.name} amount=${material.amount}")
+            if (_materials.addIfNotExist(material) { it.id == material.id }) {
+                localDataSource.insertMaterial(material)
+                Log.d("MHW", "Inserting material into repo: ${material.name}")
+            }
         }
     }
 
-    suspend fun resetAllMaterials() {
+    suspend fun clearAndResetMaterials(materials: List<Material>) {
         withContext(Dispatchers.IO) {
-            dao.deleteAll()
-            val mats = getInitialMaterials()
-            dao.insertAll(mats.map { MaterialDBEntry.fromMaterial(it) })
-            _materials.value = mats
+            localDataSource.deleteAll()
+            localDataSource.insertAll(materials)
+            Log.d("MHW", "Updated materials")
+        }
+    }
+
+    suspend fun updateMaterial(material: Material, count: Int) {
+        withContext(Dispatchers.IO) {
+            localDataSource.insertMaterial(material.copy(amount = count))
+            Log.d("MHW", "Updated material in repo: ${material.name} amount=${count}")
+        }
+    }
+
+    suspend fun deleteAllMaterials() {
+        withContext(Dispatchers.IO) {
+            localDataSource.deleteAll()
+            Log.d("MHW", "Deleting all materials in repo")
+        }
+    }
+
+    suspend fun getMaterialCount(): Int {
+        return withContext(Dispatchers.IO) {
+            return@withContext localDataSource.getMaterialCount()
         }
     }
 }

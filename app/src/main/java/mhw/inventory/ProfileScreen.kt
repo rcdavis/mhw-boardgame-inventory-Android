@@ -24,6 +24,13 @@ fun ProfileScreen(
     profileViewModel: ProfileViewModel = viewModel()
 ) {
     Column(modifier = modifier.padding(8.dp)) {
+        ErrorDialog(
+            title = "Profile Error",
+            message = null
+        ) {
+            // TODO: Implement error messages for profile screen
+        }
+
         TextField(
             value = profileViewModel.profile.campaignName,
             onValueChange = { profileViewModel.updateCampaignName(it) },

@@ -20,4 +20,7 @@ interface MaterialDao {
 
     @Query("SELECT * FROM materials ORDER BY name ASC")
     fun getAllMaterials(): Flow<List<MaterialDBEntry>>
+
+    @Query("SELECT COUNT(id) FROM materials")
+    suspend fun getMaterialCount(): Int
 }
