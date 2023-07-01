@@ -43,36 +43,12 @@ class MaterialViewModel(
         }
     }
 
-    fun testAddingMaterials() {
-        viewModelScope.launch {
-            try {
-                repository.addMaterial("Greatest Jagras Hide")
-                repository.addMaterial("Jagras Hide")
-                repository.addMaterial("Bird Wyvern Gem")
-            } catch(e: Exception) {
-                Log.e("MHW", "Failed to add material: $e")
-                uiState = uiState.copy(errorMessage = e.localizedMessage)
-            }
-        }
-    }
-
     fun addMaterial(name: String) {
         viewModelScope.launch {
             try {
                 repository.addMaterial(name)
             } catch(e: Exception) {
                 Log.e("MHW", "Failed to add material $name: $e")
-                uiState = uiState.copy(errorMessage = e.localizedMessage)
-            }
-        }
-    }
-
-    fun addMaterial(material: Material) {
-        viewModelScope.launch {
-            try {
-                repository.addMaterial(material)
-            } catch(e: Exception) {
-                Log.e("MHW", "Failed to add material ${material.name}: $e")
                 uiState = uiState.copy(errorMessage = e.localizedMessage)
             }
         }
@@ -87,6 +63,14 @@ class MaterialViewModel(
                 uiState = uiState.copy(errorMessage = e.localizedMessage)
             }
         }
+    }
+
+    fun showAddMaterialScreen() {
+        uiState = uiState.copy(showAddMaterialScreen = true)
+    }
+
+    fun dismissAddMaterialScreen() {
+        uiState = uiState.copy(showAddMaterialScreen = false)
     }
 
     fun clearErrors() {
