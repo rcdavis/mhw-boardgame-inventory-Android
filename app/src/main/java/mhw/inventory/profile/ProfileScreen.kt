@@ -34,7 +34,7 @@ fun ProfileScreen(
         }
 
         TextField(
-            value = profileViewModel.profile.campaignName,
+            value = profileViewModel.uiState.campaignName,
             onValueChange = { profileViewModel.updateCampaignName(it) },
             label = {
                 Text(stringResource(R.string.campaign_name))
@@ -44,7 +44,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.profile.playerName,
+            value = profileViewModel.uiState.playerName,
             onValueChange = { profileViewModel.updatePlayerName(it) },
             label = {
                 Text(stringResource(R.string.player_name))
@@ -54,7 +54,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.profile.hunterName,
+            value = profileViewModel.uiState.hunterName,
             onValueChange = { profileViewModel.updateHunterName(it) },
             label = {
                 Text(stringResource(R.string.hunter_name))
@@ -64,7 +64,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.profile.palicoName,
+            value = profileViewModel.uiState.palicoName,
             onValueChange = { profileViewModel.updatePalicoName(it) },
             label = {
                 Text(stringResource(R.string.palico_name))

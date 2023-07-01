@@ -1,6 +1,6 @@
 package mhw.inventory.profile
 
-data class Profile(
+data class ProfileScreenUiState(
     val campaignName: String = "",
     val playerName: String = "",
     val hunterName: String = "",
