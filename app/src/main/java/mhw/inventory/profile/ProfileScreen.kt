@@ -1,4 +1,4 @@
-package mhw.inventory
+package mhw.inventory.profile
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
@@ -10,11 +10,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import mhw.inventory.ErrorDialog
+import mhw.inventory.R
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,16 +26,20 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     profileViewModel: ProfileViewModel = viewModel()
 ) {
+    LaunchedEffect(Unit) {
+        profileViewModel.fetchProfile()
+    }
+
     Column(modifier = modifier.padding(8.dp)) {
         ErrorDialog(
             title = "Profile Error",
-            message = null
+            message = profileViewModel.uiState.errorMessage
         ) {
-            // TODO: Implement error messages for profile screen
+            profileViewModel.clearErrors()
         }
 
         TextField(
-            value = profileViewModel.profile.campaignName,
+            value = profileViewModel.uiState.campaignName,
             onValueChange = { profileViewModel.updateCampaignName(it) },
             label = {
                 Text(stringResource(R.string.campaign_name))
@@ -42,7 +49,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.profile.playerName,
+            value = profileViewModel.uiState.playerName,
             onValueChange = { profileViewModel.updatePlayerName(it) },
             label = {
                 Text(stringResource(R.string.player_name))
@@ -52,7 +59,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.profile.hunterName,
+            value = profileViewModel.uiState.hunterName,
             onValueChange = { profileViewModel.updateHunterName(it) },
             label = {
                 Text(stringResource(R.string.hunter_name))
@@ -62,7 +69,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
         )
         TextField(
-            value = profileViewModel.profile.palicoName,
+            value = profileViewModel.uiState.palicoName,
             onValueChange = { profileViewModel.updatePalicoName(it) },
             label = {
                 Text(stringResource(R.string.palico_name))

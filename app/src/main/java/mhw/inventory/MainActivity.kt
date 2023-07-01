@@ -9,11 +9,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mhw.inventory.materials.MaterialScreen
+import mhw.inventory.profile.ProfileScreen
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 import mhw.inventory.utils.Keys
 import mhw.inventory.utils.ViewModels
@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     val materialViewModel = ViewModels.getMaterialViewModel()
+                    val profileViewModel = ViewModels.getProfileViewModel()
 
                     Scaffold(
                         topBar = {
@@ -52,7 +53,7 @@ class MainActivity : ComponentActivity() {
                                 MaterialScreen(materialViewModel = materialViewModel)
                             }
                             composable(Keys.profileScreen) {
-                                ProfileScreen(profileViewModel = viewModel())
+                                ProfileScreen(profileViewModel = profileViewModel)
                             }
                         }
                     }
