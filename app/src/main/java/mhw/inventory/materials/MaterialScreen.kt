@@ -8,14 +8,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelStoreOwner
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mhw.inventory.ErrorDialog
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
+import mhw.inventory.utils.ViewModels
 
 @Composable
 fun MaterialScreen(
@@ -48,11 +46,7 @@ fun MaterialScreen(
 @Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun MaterialScreenPreview() {
-    val materialViewModel: MaterialViewModel = viewModel(
-        LocalViewModelStoreOwner.current as ViewModelStoreOwner,
-        "MaterialViewModel",
-        MaterialViewModelFactory(LocalContext.current.applicationContext)
-    )
+    val materialViewModel = ViewModels.getMaterialViewModel()
 
     MHWBoardGameInventoryTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
