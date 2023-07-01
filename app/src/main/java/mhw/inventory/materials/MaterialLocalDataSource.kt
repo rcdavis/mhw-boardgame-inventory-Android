@@ -26,4 +26,6 @@ class MaterialLocalDataSource(
     }
 
     suspend fun getMaterialCount() = dao.getMaterialCount()
+
+    suspend fun getMaxId() = dao.getMaxId()
 }

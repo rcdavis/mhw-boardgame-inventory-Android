@@ -30,4 +30,7 @@
 
     <string name="materials_title">Materials</string>
     <string name="profile_title">Profile</string>
+
+    <string name="add_material_title">Add Material</string>
+    <string name="add_material_name_title">Material Name</string>
 </resources>

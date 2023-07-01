@@ -32,6 +32,16 @@ fun MaterialScreen(
             materialViewModel.clearErrors()
         }
 
+        if (materialViewModel.uiState.showAddMaterialScreen) {
+            AddMaterialScreen(
+                onConfirm = {
+                    materialViewModel.addMaterial(it)
+                    materialViewModel.dismissAddMaterialScreen()
+                },
+                onCancel = { materialViewModel.dismissAddMaterialScreen() }
+            )
+        }
+
         MaterialList(
             materials = materialViewModel.uiState.materials,
             onUpdate = { mat, count ->

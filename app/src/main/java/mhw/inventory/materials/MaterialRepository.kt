@@ -3,6 +3,7 @@ package mhw.inventory.materials
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 import mhw.inventory.utils.addIfNotExist
 
@@ -12,6 +13,21 @@ class MaterialRepository(
     private var _materials = mutableListOf<Material>()
     val materials: Flow<List<Material>>
         get() = localDataSource.getAllMaterials()
+            .onEach { _materials = it.toMutableList() }
+
+    suspend fun addMaterial(name: String) {
+        withContext(Dispatchers.IO) {
+            Log.d("MHW", "addMaterial name = $name")
+            if (_materials.firstOrNull { it.name == name } == null) {
+                _materials.lastOrNull()?.let {
+                    val id = localDataSource.getMaxId()
+                    localDataSource.insertMaterial(Material(
+                        id = id + 1, name = name, amount = 1))
+                    Log.d("MHW", "Inserting material into repo: $name")
+                }
+            }
+        }
+    }
 
     suspend fun addMaterial(material: Material) {
         withContext(Dispatchers.IO) {
@@ -34,13 +50,6 @@ class MaterialRepository(
         withContext(Dispatchers.IO) {
             localDataSource.insertMaterial(material.copy(amount = count))
             Log.d("MHW", "Updated material in repo: ${material.name} amount=${count}")
-        }
-    }
-
-    suspend fun deleteAllMaterials() {
-        withContext(Dispatchers.IO) {
-            localDataSource.deleteAll()
-            Log.d("MHW", "Deleting all materials in repo")
         }
     }
 
