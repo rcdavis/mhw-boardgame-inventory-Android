@@ -34,6 +34,8 @@ class ProfileViewModel(
     }
 
     fun updateCampaignName(name: String) {
+        uiState = uiState.copy(campaignName = name)
+
         viewModelScope.launch {
             try {
                 repository.updateCampaignName(name)
@@ -45,6 +47,8 @@ class ProfileViewModel(
     }
 
     fun updatePlayerName(name: String) {
+        uiState = uiState.copy(playerName = name)
+
         viewModelScope.launch {
             try {
                 repository.updatePlayerName(name)
@@ -56,6 +60,8 @@ class ProfileViewModel(
     }
 
     fun updateHunterName(name: String) {
+        uiState = uiState.copy(hunterName = name)
+
         viewModelScope.launch {
             try {
                 repository.updateHunterName(name)
@@ -67,6 +73,8 @@ class ProfileViewModel(
     }
 
     fun updatePalicoName(name: String) {
+        uiState = uiState.copy(palicoName = name)
+
         viewModelScope.launch {
             try {
                 repository.updatePalicoName(name)
