@@ -1,16 +1,10 @@
 package mhw.inventory.materials
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-
-class Material(
+data class Material(
     val id: Int,
     val name: String,
-    amount: Int
+    val amount: Int
 ) {
-    var amount by mutableStateOf(amount)
-
     companion object {
         fun fromMaterialDBEntry(mdbe: MaterialDBEntry): Material {
             return Material(id = mdbe.id, name = mdbe.name, amount = mdbe.amount)

@@ -35,7 +35,6 @@ fun MaterialScreen(
         MaterialList(
             materials = materialViewModel.uiState.materials,
             onUpdate = { mat, count ->
-                mat.amount = count
                 materialViewModel.updateMaterialCount(mat, count)
             }
         )

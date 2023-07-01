@@ -32,8 +32,7 @@ class MaterialRepository(
 
     suspend fun updateMaterial(material: Material, count: Int) {
         withContext(Dispatchers.IO) {
-            material.amount = count
-            localDataSource.insertMaterial(material)
+            localDataSource.insertMaterial(material.copy(amount = count))
             Log.d("MHW", "Updated material in repo: ${material.name} amount=${count}")
         }
     }
