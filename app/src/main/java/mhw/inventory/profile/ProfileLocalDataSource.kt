@@ -14,4 +14,6 @@ class ProfileLocalDataSource(
     suspend fun insertProfile(profile: Profile) {
         return dao.insert(ProfileDBEntry.fromProfile(profile))
     }
+
+    suspend fun getProfileCount() = dao.getProfileCount()
 }

@@ -17,6 +17,9 @@ class ProfileViewModel(
 
     fun fetchProfile() {
         viewModelScope.launch {
+            if (repository.getProfileCount() == 0)
+                repository.insertProfile(Profile())
+
             repository.profile
                 .catch {
                     Log.e("MHW", "Error fetching profile: $it")

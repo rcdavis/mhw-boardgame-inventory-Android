@@ -41,4 +41,18 @@ class ProfileRepository(
             Log.d("MHW", "Updating profile palico name: $name")
         }
     }
+
+    suspend fun insertProfile(profile: Profile) {
+        withContext(Dispatchers.IO) {
+            _profile = profile
+            localDataSource.insertProfile(profile)
+            Log.d("MHW", "Updating profile...")
+        }
+    }
+
+    suspend fun getProfileCount(): Int {
+        return withContext(Dispatchers.IO) {
+            return@withContext localDataSource.getProfileCount()
+        }
+    }
 }
