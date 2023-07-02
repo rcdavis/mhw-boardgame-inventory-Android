@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import mhw.inventory.InventoryListItem
-import mhw.inventory.getMockMaterials
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
+import mhw.inventory.utils.getMockMaterials
 
 @Composable
 fun MaterialList(

@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import mhw.inventory.getInitialMaterials
+import mhw.inventory.utils.getInitialMaterials
 
 class MaterialViewModel(
     private val repository: MaterialRepository
