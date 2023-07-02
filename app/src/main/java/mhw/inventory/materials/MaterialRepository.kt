@@ -38,11 +38,18 @@ class MaterialRepository(
         }
     }
 
+    suspend fun addAllMaterials(materials: List<Material>) {
+        withContext(Dispatchers.IO) {
+            localDataSource.insertAll(materials)
+            Log.d("MHW", "Updated materials: $materials")
+        }
+    }
+
     suspend fun clearAndResetMaterials(materials: List<Material>) {
         withContext(Dispatchers.IO) {
             localDataSource.deleteAll()
             localDataSource.insertAll(materials)
-            Log.d("MHW", "Updated materials")
+            Log.d("MHW", "Cleared and Updated materials")
         }
     }
 

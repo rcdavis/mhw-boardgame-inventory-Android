@@ -19,7 +19,7 @@ class MaterialViewModel(
     fun fetchMaterials() {
         viewModelScope.launch {
             if (repository.getMaterialCount() == 0)
-                repository.clearAndResetMaterials(getInitialMaterials())
+                repository.addAllMaterials(getInitialMaterials())
 
             repository.materials
                 .catch {
