@@ -21,6 +21,10 @@ class MaterialLocalDataSource(
         dao.insertAll(materials.map { MaterialDBEntry.fromMaterial(it) })
     }
 
+    suspend fun delete(material: Material) {
+        dao.delete(MaterialDBEntry.fromMaterial(material))
+    }
+
     suspend fun deleteAll() {
         dao.deleteAll()
     }

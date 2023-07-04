@@ -65,12 +65,31 @@ class MaterialViewModel(
         }
     }
 
+    fun deleteMaterial(material: Material) {
+        viewModelScope.launch {
+            try {
+                repository.deleteMaterial(material)
+            } catch(e: Exception) {
+                Log.e("MHW", "Failed to delete material ${material.name}: $e")
+                uiState = uiState.copy(errorMessage = e.localizedMessage)
+            }
+        }
+    }
+
     fun showAddMaterialScreen() {
         uiState = uiState.copy(showAddMaterialScreen = true)
     }
 
     fun dismissAddMaterialScreen() {
         uiState = uiState.copy(showAddMaterialScreen = false)
+    }
+
+    fun showDeleteMaterialScreen(material: Material) {
+        uiState = uiState.copy(materialToDelete = material)
+    }
+
+    fun dismissDeleteMaterialScreen() {
+        uiState = uiState.copy(materialToDelete = null)
     }
 
     fun clearErrors() {
