@@ -14,33 +14,31 @@ import mhw.inventory.utils.getMockMaterials
 
 @Composable
 fun DeleteMaterialScreen(
-    material: Material?,
+    material: Material,
     onCancel: (() -> Unit)? = null,
     onConfirm: (Material) -> Unit
 ) {
-    material?.let { mat ->
-        AlertDialog(
-            title = {
-                Text(stringResource(R.string.delete_material_title))
-            },
-            text = {
-                Text(stringResource(R.string.delete_material_text, mat.name))
-            },
-            onDismissRequest = onCancel ?: {},
-            confirmButton = {
-                TextButton(onClick = { onConfirm(mat) }) {
-                    Text(stringResource(android.R.string.ok))
-                }
-            },
-            dismissButton = {
-                onCancel?.let {
-                    TextButton(onClick = it) {
-                        Text(stringResource(android.R.string.cancel))
-                    }
+    AlertDialog(
+        title = {
+            Text(stringResource(R.string.delete_material_title))
+        },
+        text = {
+            Text(stringResource(R.string.delete_material_text, material.name))
+        },
+        onDismissRequest = onCancel ?: {},
+        confirmButton = {
+            TextButton(onClick = { onConfirm(material) }) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            onCancel?.let {
+                TextButton(onClick = it) {
+                    Text(stringResource(android.R.string.cancel))
                 }
             }
-        )
-    }
+        }
+    )
 }
 
 @Preview(name = "Light Mode")

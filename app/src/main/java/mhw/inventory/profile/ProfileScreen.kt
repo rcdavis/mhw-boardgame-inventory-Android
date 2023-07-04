@@ -31,11 +31,13 @@ fun ProfileScreen(
     }
 
     Column(modifier = modifier.padding(8.dp)) {
-        ErrorDialog(
-            title = "Profile Error",
-            message = profileViewModel.uiState.errorMessage
-        ) {
-            profileViewModel.clearErrors()
+        profileViewModel.uiState.errorMessage?.let {
+            ErrorDialog(
+                title = "Profile Error",
+                message = it
+            ) {
+                profileViewModel.clearErrors()
+            }
         }
 
         TextField(

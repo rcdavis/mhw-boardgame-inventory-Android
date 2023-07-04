@@ -25,21 +25,22 @@ fun MaterialScreen(
     }
 
     Column(modifier = modifier.padding(8.dp)) {
-        ErrorDialog(
-            title = "Material Error",
-            message = materialViewModel.uiState.errorMessage
-        ) {
-            materialViewModel.clearErrors()
+        materialViewModel.uiState.errorMessage?.let {
+            ErrorDialog(
+                title = "Material Error",
+                message = it
+            ) {
+                materialViewModel.clearErrors()
+            }
         }
 
         if (materialViewModel.uiState.showAddMaterialScreen) {
             AddMaterialScreen(
-                onConfirm = {
-                    materialViewModel.addMaterial(it)
-                    materialViewModel.dismissAddMaterialScreen()
-                },
                 onCancel = { materialViewModel.dismissAddMaterialScreen() }
-            )
+            ) {
+                materialViewModel.addMaterial(it)
+                materialViewModel.dismissAddMaterialScreen()
+            }
         }
 
         materialViewModel.uiState.materialToDelete?.let { material ->

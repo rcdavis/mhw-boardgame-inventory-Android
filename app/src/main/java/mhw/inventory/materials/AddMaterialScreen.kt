@@ -24,8 +24,8 @@ import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddMaterialScreen(
-    onConfirm: (String) -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit,
+    onConfirm: (String) -> Unit
 ) {
     var materialName by remember { mutableStateOf("") }
 
