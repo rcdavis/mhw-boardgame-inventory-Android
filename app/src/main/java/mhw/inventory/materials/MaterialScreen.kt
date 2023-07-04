@@ -42,11 +42,22 @@ fun MaterialScreen(
             )
         }
 
+        materialViewModel.uiState.materialToDelete?.let { material ->
+            DeleteMaterialScreen(
+                material = material,
+                onCancel = { materialViewModel.dismissDeleteMaterialScreen() }
+            ) {
+                materialViewModel.deleteMaterial(it)
+                materialViewModel.dismissDeleteMaterialScreen()
+            }
+        }
+
         MaterialList(
             materials = materialViewModel.uiState.materials,
             onUpdate = { mat, count ->
                 materialViewModel.updateMaterialCount(mat, count)
-            }
+            },
+            onLongPress = { materialViewModel.showDeleteMaterialScreen(it) }
         )
     }
 }

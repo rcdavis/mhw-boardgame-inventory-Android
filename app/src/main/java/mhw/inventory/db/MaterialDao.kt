@@ -1,6 +1,7 @@
 package mhw.inventory.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -14,6 +15,9 @@ interface MaterialDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(materials: List<MaterialDBEntry>)
+
+    @Delete(entity = MaterialDBEntry::class)
+    suspend fun delete(material: MaterialDBEntry)
 
     @Query("DELETE FROM materials")
     suspend fun deleteAll()

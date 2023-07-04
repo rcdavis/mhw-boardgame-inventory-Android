@@ -14,7 +14,11 @@ import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
  * Displays an error message dialog if there is a message string.
  */
 @Composable
-fun ErrorDialog(title: String, message: String?, onConfirm: () -> Unit) {
+fun ErrorDialog(
+    title: String,
+    message: String?,
+    onConfirm: () -> Unit
+) {
     message?.let {
         AlertDialog(
             title = {

@@ -45,6 +45,13 @@ class MaterialRepository(
         }
     }
 
+    suspend fun deleteMaterial(material: Material) {
+        withContext(Dispatchers.IO) {
+            localDataSource.delete(material)
+            Log.d("MHW", "Deleting material ${material.name}")
+        }
+    }
+
     suspend fun clearAndResetMaterials(materials: List<Material>) {
         withContext(Dispatchers.IO) {
             localDataSource.deleteAll()
