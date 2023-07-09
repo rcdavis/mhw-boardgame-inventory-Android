@@ -23,8 +23,8 @@ import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 fun InventoryListItem(
     text: String,
     count: Int,
-    onCountChange: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onCountChange: (Int) -> Unit
 ) {
     Row(modifier = modifier.padding(start = 8.dp)) {
         Text(

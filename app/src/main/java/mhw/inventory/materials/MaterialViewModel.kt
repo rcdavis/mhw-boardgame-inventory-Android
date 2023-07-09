@@ -76,6 +76,17 @@ class MaterialViewModel(
         }
     }
 
+    fun deleteAllMaterials() {
+        viewModelScope.launch {
+            try {
+                repository.clearAndResetMaterials(listOf())
+            } catch(e: Exception) {
+                Log.e("MHW", "Failed to delete all materials: $e")
+                uiState = uiState.copy(errorMessage = e.localizedMessage)
+            }
+        }
+    }
+
     fun showAddMaterialScreen() {
         uiState = uiState.copy(showAddMaterialScreen = true)
     }

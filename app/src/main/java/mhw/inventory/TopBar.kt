@@ -49,9 +49,10 @@ fun TopBar(
 @Composable
 fun TopAppBarActionButton(
     imageVector: ImageVector,
+    contentDescription: String? = null,
     onClick: () -> Unit
 ) {
     IconButton(onClick = onClick) {
-        Icon(imageVector = imageVector, contentDescription = null)
+        Icon(imageVector = imageVector, contentDescription = contentDescription)
     }
 }

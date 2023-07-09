@@ -1,12 +1,9 @@
 package mhw.inventory
 
 import android.content.res.Configuration
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 
@@ -19,22 +16,11 @@ fun ErrorDialog(
     message: String? = null,
     onConfirm: () -> Unit
 ) {
-    AlertDialog(
-        title = {
-            Text(text = title)
-        },
-        text = {
-            message?.let {
-                Text(text = it)
-            }
-        },
-        onDismissRequest = {},
-        confirmButton = {
-            TextButton(onClick = onConfirm) {
-                Text(stringResource(android.R.string.ok))
-            }
+    BaseDialog(titleText = title, onConfirm = onConfirm) {
+        message?.let {
+            Text(text = it)
         }
-    )
+    }
 }
 
 @Preview(name = "Light Mode")
