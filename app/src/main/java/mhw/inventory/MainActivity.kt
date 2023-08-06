@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import mhw.inventory.equipment.EquipmentScreen
 import mhw.inventory.materials.MaterialScreen
 import mhw.inventory.profile.ProfileScreen
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
@@ -51,6 +52,9 @@ class MainActivity : ComponentActivity() {
                         ) {
                             composable(Keys.materialScreen) {
                                 MaterialScreen(materialViewModel = materialViewModel)
+                            }
+                            composable(Keys.equipmentScreen) {
+                                EquipmentScreen()
                             }
                             composable(Keys.profileScreen) {
                                 ProfileScreen(profileViewModel = profileViewModel)

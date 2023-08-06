@@ -25,6 +25,7 @@ fun TopBar(
     val curRoute = navBackStackEntry?.destination?.route
     val titleText = when (curRoute) {
         Keys.materialScreen -> stringResource(R.string.materials_title)
+        Keys.equipmentScreen -> stringResource(R.string.equipment_title)
         Keys.profileScreen -> stringResource(R.string.profile_title)
         else -> ""
     }
