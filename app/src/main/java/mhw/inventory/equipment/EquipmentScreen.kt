@@ -1,9 +1,11 @@
 package mhw.inventory.equipment
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +29,12 @@ import mhw.inventory.utils.ScrollingColumn
 fun EquipmentScreen(
     modifier: Modifier = Modifier
 ) {
+    val uiState = EquipmentScreenUIState(
+        headArmour = Equipment(R.string.equipment_head_armour),
+        bodyArmour = Equipment(R.string.equipment_body_armour),
+        legsArmour = Equipment(R.string.equipment_legs_armour)
+    )
+
     ScrollingColumn(
         modifier = modifier
             .padding(8.dp)
@@ -39,29 +47,43 @@ fun EquipmentScreen(
 
         EquipmentCard(
             imageId = R.drawable.helmet_icon_white,
-            nameTextId = R.string.equipment_head_armour
-        )
+            nameTextId = uiState.headArmour?.textId ?: R.string.equipment_head_armour
+        ) {
+            printMessage("Head")
+        }
+
         EquipmentCard(
             imageId = R.drawable.chest_icon_white,
-            nameTextId = R.string.equipment_body_armour
-        )
+            nameTextId = uiState.bodyArmour?.textId ?: R.string.equipment_body_armour
+        ) {
+            printMessage("Body")
+        }
+
         EquipmentCard(
             imageId = R.drawable.leg_icon_white,
-            nameTextId = R.string.equipment_legs_armour
-        )
+            nameTextId = uiState.legsArmour?.textId ?: R.string.equipment_legs_armour
+        ) {
+            printMessage("Legs")
+        }
     }
+}
+
+fun printMessage(text: String) {
+    Log.d("MHW", "Clicked card: $text")
 }
 
 @Composable
 fun EquipmentCard(
     @DrawableRes imageId: Int,
     @StringRes nameTextId: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth()
             .padding(8.dp)
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
             Image(
