@@ -23,9 +23,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import mhw.inventory.ErrorDialog
 import mhw.inventory.R
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 import mhw.inventory.utils.ScrollingColumn
+import mhw.inventory.utils.ViewModels
 
 @Composable
 fun EquipmentScreen(
@@ -41,6 +43,15 @@ fun EquipmentScreen(
             .padding(8.dp)
             .fillMaxWidth()
     ) {
+        equipmentViewModel.uiState.errorMessage?.let {
+            ErrorDialog(
+                title = stringResource(R.string.equipment_error_title),
+                message = it
+            ) {
+                equipmentViewModel.clearErrors()
+            }
+        }
+
         Text(
             text = stringResource(R.string.equipment_armour_title),
             style = MaterialTheme.typography.headlineLarge
@@ -108,9 +119,13 @@ fun EquipmentCard(
 @Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun EquipmentScreenPreview() {
+    val equipmentViewModel = ViewModels.getEquipmentViewModel()
+
     MHWBoardGameInventoryTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            EquipmentScreen()
+            EquipmentScreen(
+                equipmentViewModel = equipmentViewModel
+            )
         }
     }
 }

@@ -4,6 +4,7 @@
     <string name="hunter_name">Hunter Name</string>
     <string name="campaign_name">Campaign Name</string>
     <string name="palico_name">Palico Name</string>
+    <string name="profile_error_title">Profile Error</string>
 
     <string name="bones_inv_title">Bones, Ores, and Hides:</string>
     <string name="common_bones_inv_title">Common Bones, Ores, and Hides:</string>
@@ -37,9 +38,11 @@
     <string name="delete_material_title">Delete Material</string>
     <string name="delete_material_text">Do you want to delete material \"%1$s\"?</string>
     <string name="add_material_common_material_title">Common Materials</string>
+    <string name="material_error_title">Material Error</string>
 
     <string name="equipment_armour_title">Armour</string>
     <string name="equipment_head_armour">Head Armour</string>
     <string name="equipment_body_armour">Body Armour</string>
     <string name="equipment_legs_armour">Legs Armour</string>
+    <string name="equipment_error_title">Equipment Error</string>
 </resources>

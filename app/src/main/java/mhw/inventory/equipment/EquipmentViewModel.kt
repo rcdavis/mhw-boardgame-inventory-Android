@@ -1,20 +1,38 @@
 package mhw.inventory.equipment
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import mhw.inventory.R
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
 
-class EquipmentViewModel : ViewModel() {
+class EquipmentViewModel(
+    private val repository: EquipmentRepository
+) : ViewModel() {
     var uiState by mutableStateOf(EquipmentScreenUIState())
         private set
 
     fun fetchEquipment() {
-        uiState = EquipmentScreenUIState(
-            headArmour = Equipment(R.string.equipment_head_armour),
-            bodyArmour = Equipment(R.string.equipment_body_armour),
-            legsArmour = Equipment(R.string.equipment_legs_armour)
-        )
+        viewModelScope.launch {
+            repository.equipment
+                .catch {
+                    Log.e("MHW", it.toString())
+                    uiState = uiState.copy(errorMessage = it.localizedMessage)
+                }
+                .collect { equipmentList ->
+                    uiState = uiState.copy(
+                        headArmour = equipmentList.first { it.type == EquipmentType.HEAD },
+                        bodyArmour = equipmentList.first { it.type == EquipmentType.BODY },
+                        legsArmour = equipmentList.first { it.type == EquipmentType.LEGS }
+                    )
+                }
+        }
+    }
+
+    fun clearErrors() {
+        uiState = uiState.copy(errorMessage = null)
     }
 }
