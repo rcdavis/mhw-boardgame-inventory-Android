@@ -4,14 +4,11 @@ import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -24,19 +21,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mhw.inventory.R
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
+import mhw.inventory.utils.ScrollingColumn
 
 @Composable
 fun EquipmentScreen(
     modifier: Modifier = Modifier
 ) {
-    Column(
+    ScrollingColumn(
         modifier = modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
     ) {
         Text(
-            text = "Armour",
+            text = stringResource(R.string.equipment_armour_title),
             style = MaterialTheme.typography.headlineLarge
         )
 
@@ -70,7 +67,7 @@ fun EquipmentCard(
             Image(
                 painter = painterResource(imageId),
                 contentDescription = stringResource(nameTextId),
-                modifier = Modifier.size(100.dp)
+                modifier = Modifier.size(75.dp)
             )
 
             Text(

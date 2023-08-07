@@ -38,6 +38,7 @@
     <string name="delete_material_text">Do you want to delete material \"%1$s\"?</string>
     <string name="add_material_common_material_title">Common Materials</string>
 
+    <string name="equipment_armour_title">Armour</string>
     <string name="equipment_head_armour">Head Armour</string>
     <string name="equipment_body_armour">Body Armour</string>
     <string name="equipment_legs_armour">Legs Armour</string>
