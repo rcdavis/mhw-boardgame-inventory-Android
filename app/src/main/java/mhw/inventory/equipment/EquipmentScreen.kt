@@ -16,24 +16,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import mhw.inventory.R
 import mhw.inventory.ui.theme.MHWBoardGameInventoryTheme
 import mhw.inventory.utils.ScrollingColumn
 
 @Composable
 fun EquipmentScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    equipmentViewModel: EquipmentViewModel = viewModel()
 ) {
-    val uiState = EquipmentScreenUIState(
-        headArmour = Equipment(R.string.equipment_head_armour),
-        bodyArmour = Equipment(R.string.equipment_body_armour),
-        legsArmour = Equipment(R.string.equipment_legs_armour)
-    )
+    LaunchedEffect(Unit) {
+        equipmentViewModel.fetchEquipment()
+    }
 
     ScrollingColumn(
         modifier = modifier
@@ -47,21 +48,24 @@ fun EquipmentScreen(
 
         EquipmentCard(
             imageId = R.drawable.helmet_icon_white,
-            nameTextId = uiState.headArmour?.textId ?: R.string.equipment_head_armour
+            nameTextId = equipmentViewModel.uiState.headArmour?.textId
+                ?: R.string.equipment_head_armour
         ) {
             printMessage("Head")
         }
 
         EquipmentCard(
             imageId = R.drawable.chest_icon_white,
-            nameTextId = uiState.bodyArmour?.textId ?: R.string.equipment_body_armour
+            nameTextId = equipmentViewModel.uiState.bodyArmour?.textId
+                ?: R.string.equipment_body_armour
         ) {
             printMessage("Body")
         }
 
         EquipmentCard(
             imageId = R.drawable.leg_icon_white,
-            nameTextId = uiState.legsArmour?.textId ?: R.string.equipment_legs_armour
+            nameTextId = equipmentViewModel.uiState.legsArmour?.textId
+                ?: R.string.equipment_legs_armour
         ) {
             printMessage("Legs")
         }

@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     val materialViewModel = ViewModels.getMaterialViewModel()
+                    val equipmentViewModel = ViewModels.getEquipmentViewModel()
                     val profileViewModel = ViewModels.getProfileViewModel()
 
                     Scaffold(
@@ -54,7 +55,7 @@ class MainActivity : ComponentActivity() {
                                 MaterialScreen(materialViewModel = materialViewModel)
                             }
                             composable(Keys.equipmentScreen) {
-                                EquipmentScreen()
+                                EquipmentScreen(equipmentViewModel = equipmentViewModel)
                             }
                             composable(Keys.profileScreen) {
                                 ProfileScreen(profileViewModel = profileViewModel)
