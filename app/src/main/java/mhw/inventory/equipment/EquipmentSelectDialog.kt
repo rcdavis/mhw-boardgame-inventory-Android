@@ -41,7 +41,7 @@ fun EquipmentSelectDialog(
         enableConfirm = selectedEquipment != null
     ) {
         LazyColumn(modifier = Modifier.heightIn(0.dp, 225.dp)) {
-            items(equipmentList) {
+            items(equipmentList, key = { it.id }) {
                 Card(
                     modifier = Modifier
                         .padding(8.dp)

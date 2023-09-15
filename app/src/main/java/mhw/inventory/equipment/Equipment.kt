@@ -9,6 +9,7 @@ enum class EquipmentType {
 }
 
 data class Equipment(
+    val id: Int,
     @StringRes val textId: Int,
     val type: EquipmentType
 )
