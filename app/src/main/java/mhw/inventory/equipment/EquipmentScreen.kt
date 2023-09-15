@@ -17,10 +17,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -38,62 +36,61 @@ fun EquipmentScreen(
     modifier: Modifier = Modifier,
     equipmentViewModel: EquipmentViewModel = viewModel()
 ) {
-    var showSelectDialog by remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
+    LaunchedEffect(equipmentViewModel) {
         equipmentViewModel.fetchEquipment()
     }
 
-    if (showSelectDialog) {
+    val uiState by equipmentViewModel.uiState.collectAsState()
+
+    if (uiState.showChooseEquipmentDialog) {
         EquipmentSelectDialog(
-            equipmentList = equipmentViewModel.uiState.equipmentList,
-            onCancel = { showSelectDialog = false }
+            equipmentList = equipmentViewModel.getValidSelectEquipment(),
+            onCancel = equipmentViewModel::closeEquipmentSelectDialog
         ) {
-            
+            equipmentViewModel.setSelectedEquipment(it)
         }
-    } else {
-        ScrollingColumn(
-            modifier = modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-        ) {
-            equipmentViewModel.uiState.errorMessage?.let {
-                ErrorDialog(
-                    title = stringResource(R.string.equipment_error_title),
-                    message = it
-                ) {
-                    equipmentViewModel.clearErrors()
-                }
-            }
+    }
 
-            Text(
-                text = stringResource(R.string.equipment_armour_title),
-                style = MaterialTheme.typography.headlineLarge
+    ScrollingColumn(
+        modifier = modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+    ) {
+        uiState.errorMessage?.let {
+            ErrorDialog(
+                title = stringResource(R.string.equipment_error_title),
+                message = it,
+                onConfirm = equipmentViewModel::clearErrors
             )
+        }
 
-            EquipmentCard(
-                imageId = R.drawable.helmet_icon_white,
-                nameTextId = equipmentViewModel.uiState.headArmour?.textId
-                    ?: R.string.equipment_head_armour
-            ) {
-                printMessage("Head")
-            }
+        Text(
+            text = stringResource(R.string.equipment_armour_title),
+            style = MaterialTheme.typography.headlineLarge
+        )
 
-            EquipmentCard(
-                imageId = R.drawable.chest_icon_white,
-                nameTextId = equipmentViewModel.uiState.bodyArmour?.textId
-                    ?: R.string.equipment_body_armour
-            ) {
-                printMessage("Body")
-            }
+        EquipmentCard(
+            imageId = R.drawable.helmet_icon_white,
+            nameTextId = uiState.headArmour?.textId ?: R.string.equipment_head_armour
+        ) {
+            printMessage("Head")
+            equipmentViewModel.showEquipmentSelectDialog(EquipmentType.HEAD)
+        }
 
-            EquipmentCard(
-                imageId = R.drawable.leg_icon_white,
-                nameTextId = equipmentViewModel.uiState.legsArmour?.textId
-                    ?: R.string.equipment_legs_armour
-            ) {
-                printMessage("Legs")
-            }
+        EquipmentCard(
+            imageId = R.drawable.chest_icon_white,
+            nameTextId = uiState.bodyArmour?.textId ?: R.string.equipment_body_armour
+        ) {
+            printMessage("Body")
+            equipmentViewModel.showEquipmentSelectDialog(EquipmentType.BODY)
+        }
+
+        EquipmentCard(
+            imageId = R.drawable.leg_icon_white,
+            nameTextId = uiState.legsArmour?.textId ?: R.string.equipment_legs_armour
+        ) {
+            printMessage("Legs")
+            equipmentViewModel.showEquipmentSelectDialog(EquipmentType.LEGS)
         }
     }
 }
