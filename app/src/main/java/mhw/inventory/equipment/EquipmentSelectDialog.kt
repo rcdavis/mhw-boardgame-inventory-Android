@@ -46,7 +46,7 @@ fun EquipmentSelectDialog(
                     modifier = Modifier
                         .padding(8.dp)
                         .fillMaxWidth()
-                        .clickable(onClick = { selectedEquipment = it })
+                        .clickable { selectedEquipment = it }
                 ) {
                     Text(
                         text = stringResource(it.textId),
