@@ -24,6 +24,7 @@ class EquipmentViewModel(
                 }
                 .collect { equipmentList ->
                     uiState = uiState.copy(
+                        equipmentList = equipmentList,
                         headArmour = equipmentList.first { it.type == EquipmentType.HEAD },
                         bodyArmour = equipmentList.first { it.type == EquipmentType.BODY },
                         legsArmour = equipmentList.first { it.type == EquipmentType.LEGS }

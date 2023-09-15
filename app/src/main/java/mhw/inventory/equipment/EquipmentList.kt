@@ -4,18 +4,6 @@ import mhw.inventory.R
 
 fun getEquipment() = listOf(
     Equipment(
-        textId = R.string.equipment_head_armour,
-        type = EquipmentType.HEAD
-    ),
-    Equipment(
-        textId = R.string.equipment_body_armour,
-        type = EquipmentType.BODY
-    ),
-    Equipment(
-        textId = R.string.equipment_legs_armour,
-        type = EquipmentType.LEGS
-    ),
-    Equipment(
         textId = R.string.equipment_leather_headgear_name,
         type = EquipmentType.HEAD
     ),

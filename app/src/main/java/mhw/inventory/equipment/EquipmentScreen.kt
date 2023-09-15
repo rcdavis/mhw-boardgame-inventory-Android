@@ -17,6 +17,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,51 +38,62 @@ fun EquipmentScreen(
     modifier: Modifier = Modifier,
     equipmentViewModel: EquipmentViewModel = viewModel()
 ) {
+    var showSelectDialog by remember { mutableStateOf(false) }
+
     LaunchedEffect(Unit) {
         equipmentViewModel.fetchEquipment()
     }
 
-    ScrollingColumn(
-        modifier = modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-    ) {
-        equipmentViewModel.uiState.errorMessage?.let {
-            ErrorDialog(
-                title = stringResource(R.string.equipment_error_title),
-                message = it
-            ) {
-                equipmentViewModel.clearErrors()
+    if (showSelectDialog) {
+        EquipmentSelectDialog(
+            equipmentList = equipmentViewModel.uiState.equipmentList,
+            onCancel = { showSelectDialog = false }
+        ) {
+            
+        }
+    } else {
+        ScrollingColumn(
+            modifier = modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+        ) {
+            equipmentViewModel.uiState.errorMessage?.let {
+                ErrorDialog(
+                    title = stringResource(R.string.equipment_error_title),
+                    message = it
+                ) {
+                    equipmentViewModel.clearErrors()
+                }
             }
-        }
 
-        Text(
-            text = stringResource(R.string.equipment_armour_title),
-            style = MaterialTheme.typography.headlineLarge
-        )
+            Text(
+                text = stringResource(R.string.equipment_armour_title),
+                style = MaterialTheme.typography.headlineLarge
+            )
 
-        EquipmentCard(
-            imageId = R.drawable.helmet_icon_white,
-            nameTextId = equipmentViewModel.uiState.headArmour?.textId
-                ?: R.string.equipment_head_armour
-        ) {
-            printMessage("Head")
-        }
+            EquipmentCard(
+                imageId = R.drawable.helmet_icon_white,
+                nameTextId = equipmentViewModel.uiState.headArmour?.textId
+                    ?: R.string.equipment_head_armour
+            ) {
+                printMessage("Head")
+            }
 
-        EquipmentCard(
-            imageId = R.drawable.chest_icon_white,
-            nameTextId = equipmentViewModel.uiState.bodyArmour?.textId
-                ?: R.string.equipment_body_armour
-        ) {
-            printMessage("Body")
-        }
+            EquipmentCard(
+                imageId = R.drawable.chest_icon_white,
+                nameTextId = equipmentViewModel.uiState.bodyArmour?.textId
+                    ?: R.string.equipment_body_armour
+            ) {
+                printMessage("Body")
+            }
 
-        EquipmentCard(
-            imageId = R.drawable.leg_icon_white,
-            nameTextId = equipmentViewModel.uiState.legsArmour?.textId
-                ?: R.string.equipment_legs_armour
-        ) {
-            printMessage("Legs")
+            EquipmentCard(
+                imageId = R.drawable.leg_icon_white,
+                nameTextId = equipmentViewModel.uiState.legsArmour?.textId
+                    ?: R.string.equipment_legs_armour
+            ) {
+                printMessage("Legs")
+            }
         }
     }
 }

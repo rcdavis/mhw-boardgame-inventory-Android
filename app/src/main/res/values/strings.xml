@@ -46,4 +46,5 @@
     <string name="equipment_body_armour">Body Armour</string>
     <string name="equipment_legs_armour">Legs Armour</string>
     <string name="equipment_error_title">Equipment Error</string>
+    <string name="equipment_select_title">Select Equipment</string>
 </resources>
