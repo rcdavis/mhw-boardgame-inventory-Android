@@ -38,10 +38,13 @@ fun TopBar(
                     imageVector = Icons.Filled.Add,
                     onClick = onMaterialAdd
                 )
-                TopAppBarActionButton(
-                    imageVector = Icons.Filled.Clear,
-                    onClick = onMaterialReset
-                )
+
+                if (BuildConfig.ALLOW_DB_WIPE) {
+                    TopAppBarActionButton(
+                        imageVector = Icons.Filled.Clear,
+                        onClick = onMaterialReset
+                    )
+                }
             }
         }
     )
