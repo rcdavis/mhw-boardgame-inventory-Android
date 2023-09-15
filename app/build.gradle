@@ -9,6 +9,10 @@ android {
     namespace 'mhw.inventory'
     compileSdk 34
 
+    buildFeatures {
+        buildConfig true
+    }
+
     defaultConfig {
         applicationId "mhw.inventory"
         minSdk 21
@@ -28,6 +32,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        dbWipe {
+            flavorDimensions "version"
+            buildConfigField "boolean", "ALLOW_DB_WIPE", "true"
+        }
+
+        nonDbWipe {
+            flavorDimensions "version"
+            buildConfigField "boolean", "ALLOW_DB_WIPE", "false"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
