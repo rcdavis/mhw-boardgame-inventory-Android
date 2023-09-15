@@ -1,7 +1,6 @@
 package mhw.inventory.equipment
 
 import android.content.res.Configuration
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -73,7 +72,6 @@ fun EquipmentScreen(
             imageId = R.drawable.helmet_icon_white,
             nameTextId = uiState.headArmour?.textId ?: R.string.equipment_head_armour
         ) {
-            printMessage("Head")
             equipmentViewModel.showEquipmentSelectDialog(EquipmentType.HEAD)
         }
 
@@ -81,7 +79,6 @@ fun EquipmentScreen(
             imageId = R.drawable.chest_icon_white,
             nameTextId = uiState.bodyArmour?.textId ?: R.string.equipment_body_armour
         ) {
-            printMessage("Body")
             equipmentViewModel.showEquipmentSelectDialog(EquipmentType.BODY)
         }
 
@@ -89,14 +86,9 @@ fun EquipmentScreen(
             imageId = R.drawable.leg_icon_white,
             nameTextId = uiState.legsArmour?.textId ?: R.string.equipment_legs_armour
         ) {
-            printMessage("Legs")
             equipmentViewModel.showEquipmentSelectDialog(EquipmentType.LEGS)
         }
     }
-}
-
-fun printMessage(text: String) {
-    Log.d("MHW", "Clicked card: $text")
 }
 
 @Composable
