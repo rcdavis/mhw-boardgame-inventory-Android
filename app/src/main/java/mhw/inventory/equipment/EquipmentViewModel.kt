@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class EquipmentViewModel(
@@ -16,17 +17,28 @@ class EquipmentViewModel(
 
     fun fetchEquipment() {
         viewModelScope.launch {
-            repository.equipment
+            combine(
+                repository.equipment, repository.headEquipment,
+                repository.bodyEquipment, repository.legsEquipment
+            ) { equipmentList, head, body, legs ->
+                EquipmentScreenUIState(
+                    equipmentList = equipmentList,
+                    headArmour = head,
+                    bodyArmour = body,
+                    legsArmour = legs
+                )
+            }
                 .catch {
                     Log.e("MHW", it.toString())
+                    it.printStackTrace()
                     _uiState.value = _uiState.value.copy(errorMessage = it.localizedMessage)
                 }
-                .collect { equipmentList ->
+                .collect {
                     _uiState.value = _uiState.value.copy(
-                        equipmentList = equipmentList,
-                        headArmour = equipmentList.first { it.type == EquipmentType.HEAD },
-                        bodyArmour = equipmentList.first { it.type == EquipmentType.BODY },
-                        legsArmour = equipmentList.first { it.type == EquipmentType.LEGS }
+                        equipmentList = it.equipmentList,
+                        headArmour = it.headArmour,
+                        bodyArmour = it.bodyArmour,
+                        legsArmour = it.legsArmour
                     )
                 }
         }
@@ -62,6 +74,12 @@ class EquipmentViewModel(
                     legsArmour = equipment,
                     showChooseEquipmentDialog = false
                 )
+            }
+        }
+
+        equipment?.let {
+            viewModelScope.launch {
+                repository.insertEquipment(equipment)
             }
         }
     }
