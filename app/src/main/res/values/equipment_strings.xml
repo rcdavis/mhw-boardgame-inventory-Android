@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Head Armour -->
+    <string name="equipment_leather_headgear_name">Leather Headgear</string>
+    <string name="equipment_chainmail_headgear_name">Chainmail Headgear</string>
+    <string name="equipment_bone_helm_name">Bone Helm</string>
+    <string name="equipment_alloy_helm_name">Alloy Helm</string>
+    <string name="equipment_jagras_helm_name">Jagras Helm</string>
+    <string name="equipment_kadachi_helm_name">Kadachi Helm</string>
+    <string name="equipment_anja_helm_name">Anja Helm</string>
+    <string name="equipment_rathalos_helm_name">Rathalos Helm</string>
+    <string name="equipment_rath_soul_helm_name">Rath Soul Helm</string>
+    <string name="equipment_barroth_helm_name">Barroth Helm</string>
+    <string name="equipment_pukei_hood_name">Pukei Hood</string>
+    <string name="equipment_jyura_helm_name">Jyura Helm</string>
+    <string name="equipment_diablos_helm_name">Diablos Helm</string>
+    <string name="equipment_diablos_nero_helm_name">Diablos Nero Helm</string>
+
+    <!-- Body Armour -->
+    <string name="equipment_leather_mail_name">Leather Mail</string>
+    <string name="equipment_chainmail_vest_name">Chainmail Vest</string>
+    <string name="equipment_alloy_mail_name">Alloy Mail</string>
+    <string name="equipment_jagras_mail_name">Jagras Mail</string>
+    <string name="equipment_kadachi_mail_name">Kadachi Mail</string>
+    <string name="equipment_anja_mail_name">Anja Mail</string>
+    <string name="equipment_rathalos_mail_name">Rathalos Mail</string>
+    <string name="equipment_rath_soul_mail_name">Rath Soul Mail</string>
+    <string name="equipment_barroth_mail_name">Barroth Mail</string>
+    <string name="equipment_pukei_mail_name">Pukei Mail</string>
+    <string name="equipment_jyura_mail_name">Jyura Mail</string>
+    <string name="equipment_diablos_mail_name">Diablos Mail</string>
+    <string name="equipment_diablos_nero_mail_name">Diablos Nero Mail</string>
+
+    <!-- Legs Armour -->
+    <string name="equipment_leather_trousers_name">Leather Trousers</string>
+    <string name="equipment_chainmail_trousers_name">Chainmail Trousers</string>
+    <string name="equipment_bone_greaves_name">Bone Greaves</string>
+    <string name="equipment_jagras_greaves_name">Jagras Greaves</string>
+    <string name="equipment_kadachi_greaves_name">Kadachi Greaves</string>
+    <string name="equipment_anja_greaves_name">Anja Greaves</string>
+    <string name="equipment_rathalos_greaves_name">Rathalos Greaves</string>
+    <string name="equipment_rath_soul_greaves_name">Rath Soul Greaves</string>
+    <string name="equipment_barroth_greaves_name">Barroth Greaves</string>
+    <string name="equipment_pukei_greaves_name">Pukei Greaves</string>
+    <string name="equipment_diablos_greaves_name">Diablos Greaves</string>
+    <string name="equipment_diablos_nero_greaves_name">Diablos Nero Greaves</string>
+</resources>

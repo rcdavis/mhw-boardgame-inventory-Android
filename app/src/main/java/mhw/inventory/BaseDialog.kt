@@ -16,6 +16,7 @@ fun BaseDialog(
     titleText: String,
     onConfirm: () -> Unit,
     onCancel: (() -> Unit)? = null,
+    enableConfirm: Boolean = true,
     content: @Composable (() -> Unit)? = null
 ) {
     AlertDialog(
@@ -23,7 +24,10 @@ fun BaseDialog(
         text = content,
         onDismissRequest = onCancel ?: {},
         confirmButton = {
-            TextButton(onClick = onConfirm) {
+            TextButton(
+                onClick = onConfirm,
+                enabled = enableConfirm
+            ) {
                 Text(stringResource(android.R.string.ok))
             }
         },
@@ -42,12 +46,14 @@ fun BaseDialog(
     @StringRes titleTextId: Int,
     onConfirm: () -> Unit,
     onCancel: (() -> Unit)? = null,
+    enableConfirm: Boolean = true,
     content: @Composable (() -> Unit)? = null
 ) {
     BaseDialog(
         titleText = stringResource(titleTextId),
         onConfirm = onConfirm,
         onCancel = onCancel,
+        enableConfirm = enableConfirm,
         content = content
     )
 }
@@ -86,6 +92,27 @@ fun BaseDialogNoCancelPreview() {
             BaseDialog(
                 titleText = "Base Dialog",
                 onConfirm = {}
+            ) {
+                Text("Failed to create an object of some kind and need to revert and stuff.")
+            }
+        }
+    }
+}
+
+@Preview(name = "Light Mode - Disabled Confirm", group = "Disabled Confirm")
+@Preview(
+    name = "Dark Mode - Disabled Confirm",
+    group = "Disabled Confirm",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun BaseDialogDisabledConfirmPreview() {
+    MHWBoardGameInventoryTheme {
+        Surface {
+            BaseDialog(
+                titleText = "Base Dialog",
+                onConfirm = {},
+                enableConfirm = false
             ) {
                 Text("Failed to create an object of some kind and need to revert and stuff.")
             }
